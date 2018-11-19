@@ -29,8 +29,8 @@ configuration: Release
 
 environment:
   matrix:
-  - solution_name: SpeckleDynamo\SpeckleDynamo.sln
-  - solution_name: SpeckleRhino\SpeckleRhino.sln
+  - solution_name: SpeckleDynamo
+  - solution_name: SpeckleRhino
 
 before_build:
   - nuget restore
@@ -45,10 +45,12 @@ before_build:
   - cd ..\..
 
 build_script:
-  - msbuild %solution_name%
+  - msbuild %solution_name%\%solution_name%.sln
 
 build:
+  project: $(solution_name)\$(solution_name).sln
   verbosity: minimal
+
 
 after_build:
   - InnoSetup\ISCC.exe SpeckleInstaller.iss
