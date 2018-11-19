@@ -29,11 +29,11 @@ configuration: Release
 
 environment:
   matrix:
-  - solution_name: SpeckleDynamo
-  - solution_name: SpeckleRhino
+  - solution_name: SpeckleDynamo\SpeckleDynamo.sln
+  - solution_name: SpeckleRhino\SpeckleRhino.sln
 
 before_build:
-  - nuget restore
+  - nuget restore %solution_name%
     # nuget restore SpeckleCore/SpeckleCore/SpeckleCore.sln
   - mkdir %AppData%\Grasshopper\Libraries\SpeckleSendReceive
   - mkdir Release
@@ -45,10 +45,10 @@ before_build:
   - cd ..\..
 
 build_script:
-  - msbuild %solution_name%\%solution_name%.sln
+  - msbuild %solution_name%
 
 build:
-  project: $(solution_name)\$(solution_name).sln
+  project: $(solution_name)
   verbosity: minimal
 
 
