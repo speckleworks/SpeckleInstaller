@@ -51,9 +51,7 @@ build:
   verbosity: minimal
 
 after_build:
-  # zip everything into a zip file containing package folder structure
-  - "InnoSetup\ISCC.exe" "SpeckleInstaller.iss"
-  #- 7z a SpeckleDynamo-%APPVEYOR_BUILD_VERSION%.zip "%APPVEYOR_BUILD_FOLDER%\SpeckleDynamo\SpeckleDynamo\bin\Release\Speckle for Dynamo\*"
+  - InnoSetup\ISCC.exe SpeckleInstaller.iss
 
 artifacts:
   path: Speckle.exe
