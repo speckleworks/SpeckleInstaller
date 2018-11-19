@@ -1,3 +1,6 @@
 [submodule "SpeckleDynamo"]
 	path = SpeckleDynamo
 	url = https://github.com/speckleworks/SpeckleDynamo
+[submodule "SpeckleRhino"]
+	path = SpeckleRhino
+	url = https://github.com/speckleworks/SpeckleRhino.git
