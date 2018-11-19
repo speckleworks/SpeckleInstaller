@@ -1,0 +1,3 @@
+[submodule "SpeckleDynamo"]
+	path = SpeckleDynamo
+	url = https://github.com/speckleworks/SpeckleDynamo
