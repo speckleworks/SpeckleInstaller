@@ -28,7 +28,7 @@ platform: Any CPU
 configuration: Release
 
 environment:
-  - lastJob: 'Environment: solution_name=SpeckleRhino\SpeckleRhino.sln'
+  lastJob: 'Environment: solution_name=SpeckleRhino\SpeckleRhino.sln'
   matrix:
   - solution_name: SpeckleUpdater.sln
   - solution_name: SpeckleDynamo\SpeckleDynamo.sln
