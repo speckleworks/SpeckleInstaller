@@ -28,21 +28,23 @@ platform: Any CPU
 configuration: Release
 
 environment:
+  - lastJob: 'Environment: solution_name=SpeckleRhino\SpeckleRhino.sln'
   matrix:
+  - solution_name: SpeckleUpdater.sln
   - solution_name: SpeckleDynamo\SpeckleDynamo.sln
   - solution_name: SpeckleRhino\SpeckleRhino.sln
 
 before_build:
   - nuget restore %solution_name%
-    # nuget restore SpeckleCore/SpeckleCore/SpeckleCore.sln
-  - mkdir %AppData%\Grasshopper\Libraries\SpeckleSendReceive
-  - mkdir Release
-  # install npm dependencies for SpeckleView and build
-  - cd SpeckleRhino\SpeckleView
-  - npm install
-  - npm run build
-  # return to build dir
-  - cd ..\..
+  - ps: |
+      if ($env:APPVEYOR_JOB_NAME -eq $env:lastJob) {
+      mkdir %AppData%\Grasshopper\Libraries\SpeckleSendReceive
+      mkdir Release
+      cd SpeckleRhino\SpeckleView
+      npm install
+      npm run build
+      cd ..\..
+      }
 
 build_script:
   - msbuild %solution_name%
@@ -52,8 +54,14 @@ build:
   verbosity: minimal
 
 
-after_build:
-  - InnoSetup\ISCC.exe SpeckleInstaller.iss
+# after_build:
+#   - InnoSetup\ISCC.exe SpeckleInstaller.iss
+after_build : 
+  - ps: |
+      if ($env:APPVEYOR_JOB_NAME -eq $env:lastJob) {
+      InnoSetup\ISCC.exe SpeckleInstaller.iss
+      }
+      
 
 artifacts:
   path: Speckle.exe
