@@ -1,8 +1,8 @@
 ;defining variables
-#define Repository     "."
 #define AppName      "Speckle"
 #define AppVersion GetFileVersion("SpeckleUpdater\bin\Release\SpeckleUpdater.exe")
 #define RhinoVersion  GetFileVersion("SpeckleRhino\Release\SpeckleRhinoConverter.dll")
+#define DynamoVersion  GetFileVersion("SpeckleDynamo\SpeckleDynamo\bin\Release\SpeckleDynamo.dll")
 #define AppPublisher "Speckle"
 #define AppURL       "https://speckle.works"
 
@@ -35,8 +35,8 @@ PrivilegesRequired=lowest
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Components]
-Name: dynamo; Description: Speckle for Dynamo 2.0; Types: full 
-Name: gh; Description: Speckle for Rhino+Grasshopper;  Types: full
+Name: dynamo; Description: Speckle for Dynamo 2.0 v{#DynamoVersion}; Types: full 
+Name: gh; Description: Speckle for Rhino+Grasshopper v{#RhinoVersion};  Types: full
 ;Name: excel; Description: Speckle for Revit;  Types: full
 
 
@@ -45,14 +45,14 @@ Name: "{app}"; Permissions: everyone-full
 
 [Files]
 ;updater
-Source: "{#Repository}\SpeckleUpdater\bin\Release\*"; DestDir: "{userappdata}\Speckle\"; Flags: ignoreversion recursesubdirs;
+Source: ".\SpeckleUpdater\bin\Release\*"; DestDir: "{userappdata}\Speckle\"; Flags: ignoreversion recursesubdirs;
 
 ;dynamo
-Source: "..\SpeckleDynamo\SpeckleDynamo\bin\Release\Speckle for Dynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
-Source: "..\SpeckleDynamo\SpeckleDynamo\bin\Release\Speckle for Dynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: ".\SpeckleDynamo\SpeckleDynamo\bin\Release\Speckle for Dynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: ".\SpeckleDynamo\SpeckleDynamo\bin\Release\Speckle for Dynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
 
 ;rhino+gh                                                                                                                                      
-Source: "..\SpeckleRhino\Release\*"; DestDir: "{userappdata}\McNeel\Rhinoceros\6.0\Plug-ins\Speckle Rhino Plugin (512d9705-6f92-49ca-a606-d6d5c1ac6aa2)\{#RhinoVersion}"; Flags: ignoreversion recursesubdirs; Components: gh  
+Source: ".\SpeckleRhino\Release\*"; DestDir: "{userappdata}\McNeel\Rhinoceros\6.0\Plug-ins\Speckle Rhino Plugin (512d9705-6f92-49ca-a606-d6d5c1ac6aa2)\{#RhinoVersion}"; Flags: ignoreversion recursesubdirs; Components: gh  
 
 ;excel                                                                                                                                    
 ;Source: "{#Repository}\Arup.Compute.Excel\bin\Release\Arup.Compute.Excel-AddIn-packed.xll"; DestDir: "{userappdata}\Microsoft\AddIns\"; Flags: ignoreversion; Components: excel   
@@ -60,6 +60,7 @@ Source: "..\SpeckleRhino\Release\*"; DestDir: "{userappdata}\McNeel\Rhinoceros\6
 
 [Icons]
 Name: "{group}\Check for updates"; Filename: "{app}\{#UpdaterFilename}"
+Name: "{userappdata}\Microsoft\Windows\Start Menu\Programs\Startup\Speckle"; Filename: "{app}\{#UpdaterFilename}"
 Name: "{group}\{cm:UninstallProgram,{#AppName}}"; Filename: "{uninstallexe}"
 ;Name: "{commondesktop}\{#AppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 

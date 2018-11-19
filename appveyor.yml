@@ -1,0 +1,69 @@
+# General Configuration
+version: 1.0.0.{build}
+skip_branch_with_pr: true
+
+# Environment Configuration
+image: Visual Studio 2017
+cache:
+  - '%LocalAppData%\NuGet\v3-cache'
+
+install:
+  #init and update submodules
+  - git submodule update --recursive --init
+    # update node.js to latest 8.x release
+  - ps: Install-Product node 8
+  - node --version
+  - npm --version
+
+ # version
+assembly_info:
+  patch: true
+  file: AssemblyInfo.*
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+
+
+# Build Configuration
+platform: Any CPU
+configuration: Release
+
+environment:
+  matrix:
+  - solution_name: SpeckleDynamo\SpeckleDynamo.sln
+  - solution_name: SpeckleRhino\SpeckleRhino.sln
+
+before_build:
+  - nuget restore
+    # nuget restore SpeckleCore/SpeckleCore/SpeckleCore.sln
+  - mkdir %AppData%\Grasshopper\Libraries\SpeckleSendReceive
+  - mkdir Release
+  # install npm dependencies for SpeckleView and build
+  - cd SpeckleRhino\SpeckleView
+  - npm install
+  - npm run build
+  # return to build dir
+  - cd ..\..
+
+build_script:
+  - msbuild %solution_name%
+
+build:
+  verbosity: minimal
+
+after_build:
+  # zip everything into a zip file containing package folder structure
+  - "InnoSetup\ISCC.exe" "SpeckleInstaller.iss"
+  #- 7z a SpeckleDynamo-%APPVEYOR_BUILD_VERSION%.zip "%APPVEYOR_BUILD_FOLDER%\SpeckleDynamo\SpeckleDynamo\bin\Release\Speckle for Dynamo\*"
+
+artifacts:
+  path: Speckle.exe
+  name: Release
+
+notifications:
+- provider: Slack
+  incoming_webhook: https://hooks.slack.com/services/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
+  channel: '#devtalk'
+  template: Build <{{buildUrl}}|#{{buildVersion}}> (<{{commitUrl}}|{{commitId}}>) of {{repositoryName}}@{{branch}}) by {{commitAuthor}} {{status}} in {{duration}}
+  on_build_success: false
+  on_build_failure: true
+  on_build_status_changed: true
