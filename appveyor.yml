@@ -49,16 +49,12 @@ after_build :
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
       $artifactFileName = $artifacts[0].fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
-      Start-Job -Name WebReq -ScriptBlock {Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers}
-      Wait-Job -Name WebReq
+      $start_time = Get-Date
+      Invoke-WebRequest -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRhino"
-      Write-Host "DESTINATION=$dest"
+      Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
       New-Item -ItemType directory -Path $dest
       7z x -o$dest $localArtifactPath -r -aoa
-      Get-ChildItem $dest | 
-      Foreach-Object {
-          Write-Host Get-Content $_.FullName
-      }
   # DOWNLOAD DYNAMO ARTIFACTS
   - ps: |
       $prjUrl = "$apiUrl/projects/speckleworks/speckledynamo/branch/master"
@@ -71,8 +67,7 @@ after_build :
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
       $artifactFileName = $artifacts[0].fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
-      Start-Job -Name WebReq -ScriptBlock {Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers}
-      Wait-Job -Name WebReq
+      Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleDynamo"
       New-Item -ItemType directory -Path $dest
       7z x -o$dest $localArtifactPath -r -aoa
