@@ -30,16 +30,17 @@ build:
 # after_build:
 #   - InnoSetup\ISCC.exe SpeckleInstaller.iss
 after_build : 
-  # DOWNLOAD RHINO ARTIFACTS
+  - sh: DOWNLOAD_FILE_DIR=%APPVEYOR_BUILD_FOLDER%
+  # DOWNLOAD RHINO ARTIFACTSz      
   - sh: DOWNLOAD_FILE=specklerhino.rhi
   - sh: DOWNLOAD_ADDRESS=https://ci.appveyor.com/api/projects/speckleworks/specklerhino/artifacts/$DOWNLOAD_FILE
-  - sh: 'curl -fsSL -G -v -o "$DOWNLOAD_FILE" "$DOWNLOAD_ADDRESS" --data-urlencode "branch=master"'
-  - 7z x specklerhino.rhi -o%APPVEYOR_BUILD_FOLDER%\SpeckleRhino\Release\ -r
+  - sh: 'curl -fsSL -G -v -o "$DOWNLOAD_FILE_DIR\$DOWNLOAD_FILE" "$DOWNLOAD_ADDRESS" --data-urlencode "branch=master"'
+  - 7z x %APPVEYOR_BUILD_FOLDER%\specklerhino.rhi -o%APPVEYOR_BUILD_FOLDER%\SpeckleRhino\Release\ -r
   # DOWNLOAD DYNAMO ARTIFACTS
   - sh: DOWNLOAD_FILE=SpeckleDynamo-0.0.6.124.zip
   - sh: DOWNLOAD_ADDRESS=https://ci.appveyor.com/api/projects/speckleworks/specklerdynamo/artifacts/$DOWNLOAD_FILE
-  - sh: 'curl -fsSL -G -v -o "$DOWNLOAD_FILE" "$DOWNLOAD_ADDRESS" --data-urlencode "branch=master"'
-  - 7z x SpeckleDynamo-0.0.6.124.zip -o%APPVEYOR_BUILD_FOLDER%\SpeckleDynamo\SpeckleDynamo\bin\Release\Speckle for Dynamo\ -r
+  - sh: 'curl -fsSL -G -v -o "DOWNLOAD_FILE_DIR\$DOWNLOAD_FILE" "$DOWNLOAD_ADDRESS" --data-urlencode "branch=master"'
+  - 7z x %APPVEYOR_BUILD_FOLDER%\SpeckleDynamo-0.0.6.124.zip -o%APPVEYOR_BUILD_FOLDER%\SpeckleDynamo\SpeckleDynamo\bin\Release\Speckle for Dynamo\ -r
   # EXECUTE INNO
   - InnoSetup\ISCC.exe SpeckleInstaller.iss
 
