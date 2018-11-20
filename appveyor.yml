@@ -31,6 +31,12 @@ build:
 #   - InnoSetup\ISCC.exe SpeckleInstaller.iss
 after_build : 
   - ps: |
+      $token = 'v2.bngo3nen438pm58fx2n1'
+      $headers = @{
+        "Authorization" = "Bearer $token"
+        "Content-type" = "application/json"
+      }
+  - ps: |
       $apiUrl = 'https://ci.appveyor.com/api/projects/speckleworks/specklerhino/branch/master'
       $headers = @{
         "Authorization" = "Bearer $token"
@@ -41,7 +47,7 @@ after_build :
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
       $artifactFileName = $artifacts[0].fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
-      Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath
+      Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
       7z x $localArtifactPath  -o$Env:APPVEYOR_BUILD_FOLDER\SpeckleRhino\Release\ -r
   # DOWNLOAD DYNAMO ARTIFACTS
   - ps: |
@@ -55,7 +61,7 @@ after_build :
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
       $artifactFileName = $artifacts[0].fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
-      Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath
+      Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
       7z x $localArtifactPath -o$Env:APPVEYOR_BUILD_FOLDER\SpeckleDynamo\SpeckleDynamo\bin\Release\Speckle for Dynamo\ -r
   # EXECUTE INNO
   - InnoSetup\ISCC.exe SpeckleInstaller.iss
