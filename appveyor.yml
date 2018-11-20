@@ -44,8 +44,9 @@ after_build :
       }
       $project = Invoke-RestMethod -Method Get -Uri "$apiUrl" -Headers $headers
       $jobId = $project.build.jobs[0].jobId
-      Write-Host $jobId
+      Write-Host "$apiUrl/buildjobs/$jobId/artifacts"
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
+      Write-Host $artifacts
       $artifactFileName = $artifacts[0].fileName
       Write-Host $artifactFileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
