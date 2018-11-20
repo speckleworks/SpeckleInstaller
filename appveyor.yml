@@ -54,7 +54,8 @@ after_build :
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRhino"
       Write-Output "Time taken downloading: $((Get-Date).Subtract($start_time).Seconds) second(s)"
       Write-Output "DESTINATION=$dest"
-      7z x -o$dest $localArtifactPath -r -aoa
+      New-Item -ItemType directory -Path $dest
+      7z x -oC:\projects\speckleinstaller\SpeckleRhino C:\projects\speckleinstaller\specklerhino.rhi -r -aoa
       Write-Output "Time taken unzipping: $((Get-Date).Subtract($start_time).Seconds) second(s)"
   - ls C:\projects\speckleinstaller\SpeckleRhino
   # DOWNLOAD DYNAMO ARTIFACTS
