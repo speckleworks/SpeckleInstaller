@@ -51,6 +51,7 @@ after_build :
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRhino"
+      New-Item -ItemType directory -Path $dest
       7z x -o$dest $localArtifactPath -r -aoa
       Get-ChildItem $dest | 
       Foreach-Object {
@@ -70,6 +71,7 @@ after_build :
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleDynamo"
+      New-Item -ItemType directory -Path $dest
       7z x -o$dest $localArtifactPath -r -aoa
             Get-ChildItem $dest | 
       Foreach-Object {
