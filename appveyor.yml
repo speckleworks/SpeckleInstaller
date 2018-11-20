@@ -30,7 +30,7 @@ build:
 # after_build:
 #   - InnoSetup\ISCC.exe SpeckleInstaller.iss
 after_build : 
-      - ps: |
+  - ps: |
       $apiUrl = 'https://ci.appveyor.com/api/projects/speckleworks/specklerhino/branch/master'
       $headers = @{
         "Authorization" = "Bearer $token"
@@ -45,7 +45,7 @@ after_build :
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath
       7z x $localArtifactPath  -o$downloadLocation\SpeckleRhino\Release\ -r
   # DOWNLOAD DYNAMO ARTIFACTS
-      - ps: |
+  - ps: |
       $apiUrl = 'https://ci.appveyor.com/api/projects/speckleworks/speckledynamo/branch/master'
       $headers = @{
         "Authorization" = "Bearer $token"
