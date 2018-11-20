@@ -7,14 +7,6 @@ image: Visual Studio 2017
 cache:
   - '%LocalAppData%\NuGet\v3-cache'
 
-install:
-  #init and update submodules
-  - git submodule update --recursive --init
-    # update node.js to latest 8.x release
-  - ps: Install-Product node 8
-  - node --version
-  - npm --version
-
  # version
 assembly_info:
   patch: true
@@ -27,41 +19,29 @@ assembly_info:
 platform: Any CPU
 configuration: Release
 
-environment:
-  lastJob: 'Environment: solution_name=SpeckleRhino\SpeckleRhino.sln'
-  matrix:
-  - solution_name: SpeckleUpdater.sln
-  - solution_name: SpeckleDynamo\SpeckleDynamo.sln
-  - solution_name: SpeckleRhino\SpeckleRhino.sln
-
 before_build:
-  - nuget restore %solution_name%
-  - ps: |
-      if ($env:APPVEYOR_JOB_NAME -eq $env:lastJob) {
-      mkdir %AppData%\Grasshopper\Libraries\SpeckleSendReceive
-      mkdir Release
-      cd SpeckleRhino\SpeckleView
-      npm install
-      npm run build
-      cd ..\..
-      }
-
-build_script:
-  - msbuild %solution_name%
+  - nuget restore
 
 build:
-  project: $(solution_name)
+  project: SpeckleUpdater.sln
   verbosity: minimal
 
 
 # after_build:
 #   - InnoSetup\ISCC.exe SpeckleInstaller.iss
 after_build : 
-  - ps: |
-      if ($env:APPVEYOR_JOB_NAME -eq $env:lastJob) {
-      InnoSetup\ISCC.exe SpeckleInstaller.iss
-      }
-      
+  # DOWNLOAD RHINO ARTIFACTS
+  - sh: DOWNLOAD_FILE=specklerhino.rhi
+  - sh: DOWNLOAD_ADDRESS=https://ci.appveyor.com/api/projects/speckleworks/specklerhino/artifacts/$DOWNLOAD_FILE
+  - sh: 'curl -fsSL -G -v -o "$DOWNLOAD_FILE" "$DOWNLOAD_ADDRESS" --data-urlencode "branch=master"'
+  - 7z x specklerhino.rhi -o%APPVEYOR_BUILD_FOLDER%\SpeckleRhino\Release\ -r
+  # DOWNLOAD DYNAMO ARTIFACTS
+  - sh: DOWNLOAD_FILE=SpeckleDynamo-0.0.6.124.zip
+  - sh: DOWNLOAD_ADDRESS=https://ci.appveyor.com/api/projects/speckleworks/specklerdynamo/artifacts/$DOWNLOAD_FILE
+  - sh: 'curl -fsSL -G -v -o "$DOWNLOAD_FILE" "$DOWNLOAD_ADDRESS" --data-urlencode "branch=master"'
+  - 7z x SpeckleDynamo-0.0.6.124.zip -o%APPVEYOR_BUILD_FOLDER%\SpeckleDynamo\SpeckleDynamo\bin\Release\Speckle for Dynamo\ -r
+  # EXECUTE INNO
+  - InnoSetup\ISCC.exe SpeckleInstaller.iss
 
 artifacts:
   path: Speckle.exe
