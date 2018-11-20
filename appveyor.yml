@@ -44,8 +44,10 @@ after_build :
       }
       $project = Invoke-RestMethod -Method Get -Uri "$apiUrl" -Headers $headers
       $jobId = $project.build.jobs[0].jobId
+      Write-Host $jobId
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
       $artifactFileName = $artifacts[0].fileName
+      Write-Host $artifactFileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
       7z x $localArtifactPath  -o$Env:APPVEYOR_BUILD_FOLDER\SpeckleRhino\Release\ -r
