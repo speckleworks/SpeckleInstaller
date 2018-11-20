@@ -42,7 +42,7 @@ namespace SpeckleUpdater
       }
 
       //launch the just downloaded installer
-      Process.Start(installerPath, "");
+      Process.Start(installerPath, "/SP- /VERYSILENT /SUPPRESSMSGBOXES /NOICONS");
     }
 
     private static bool UpdateAvailable(Release release)
