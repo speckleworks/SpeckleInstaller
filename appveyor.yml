@@ -24,7 +24,7 @@ before_build:
 
 build:
   project: SpeckleUpdater.sln
-  verbosity: minimal
+  #verbosity: minimal
 
 
 # after_build:
