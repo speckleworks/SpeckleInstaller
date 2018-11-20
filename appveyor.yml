@@ -57,7 +57,7 @@ after_build :
       New-Item -ItemType directory -Path $dest
       7z x -o$dest $localArtifactPath -r -aoa
       Write-Output "Time taken unzipping: $((Get-Date).Subtract($start_time).Seconds) second(s)"
-      Write-Output Test-Path "C:\projects\speckleinstaller\SpeckleRhino\cef.pak"
+  - ls C:\projects\speckleinstaller\SpeckleRhino
   # DOWNLOAD DYNAMO ARTIFACTS
   - ps: |
       $prjUrl = "$apiUrl/projects/speckleworks/speckledynamo/branch/master"
@@ -74,6 +74,7 @@ after_build :
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleDynamo"
       New-Item -ItemType directory -Path $dest
       7z x -o$dest $localArtifactPath -r -aoa
+  - ls C:\projects\speckleinstaller\SpeckleDynamo
   # EXECUTE INNO
   - InnoSetup\ISCC.exe SpeckleInstaller.iss
 
