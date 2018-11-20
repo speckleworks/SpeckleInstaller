@@ -52,9 +52,11 @@ after_build :
       $start_time = Get-Date
       Invoke-WebRequest -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRhino"
-      Write-Output "Time taken: $((Get-Date).Subtract($start_time).Seconds) second(s)"
+      Write-Output "Time taken downloading: $((Get-Date).Subtract($start_time).Seconds) second(s)"
+      Write-Output "DESTINATION=$dest"
       New-Item -ItemType directory -Path $dest
-      7z x -o$dest $localArtifactPath -r -aoa
+      Expand-Archive $localArtifactPath -DestinationPath $dest -Force
+      Write-Output "Time taken unzipping: $((Get-Date).Subtract($start_time).Seconds) second(s)"
   # DOWNLOAD DYNAMO ARTIFACTS
   - ps: |
       $prjUrl = "$apiUrl/projects/speckleworks/speckledynamo/branch/master"
