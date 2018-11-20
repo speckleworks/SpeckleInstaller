@@ -55,8 +55,9 @@ after_build :
       Write-Output "Time taken downloading: $((Get-Date).Subtract($start_time).Seconds) second(s)"
       Write-Output "DESTINATION=$dest"
       New-Item -ItemType directory -Path $dest
-      Expand-Archive $localArtifactPath -DestinationPath $dest -Force
+      7z x -o$dest $localArtifactPath -r -aoa
       Write-Output "Time taken unzipping: $((Get-Date).Subtract($start_time).Seconds) second(s)"
+      Write-Output Test-Path "C:\projects\speckleinstaller\SpeckleRhino\cef.pak"
   # DOWNLOAD DYNAMO ARTIFACTS
   - ps: |
       $prjUrl = "$apiUrl/projects/speckleworks/speckledynamo/branch/master"
