@@ -48,16 +48,13 @@ after_build :
       $jobId = $project.build.jobs[0].jobId
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
       $artifactFileName = $artifacts[0].fileName
-      $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
+      $localArtifactPath = "C:\projects\speckleinstaller\$artifactFileName"
       $start_time = Get-Date
       Invoke-WebRequest -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
-      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRhino"
-      Write-Output "Time taken downloading: $((Get-Date).Subtract($start_time).Seconds) second(s)"
-      Write-Output "DESTINATION=$dest"
+      $dest = "C:\projects\speckleinstaller\SpeckleRhino"
       New-Item -ItemType directory -Path $dest
-      7z x -oC:\projects\speckleinstaller\SpeckleRhino C:\projects\speckleinstaller\specklerhino.rhi -r -aoa
+      7z x -o$dest $localArtifactPath -r -aoa
       Write-Output "Time taken unzipping: $((Get-Date).Subtract($start_time).Seconds) second(s)"
-  - ls C:\projects\speckleinstaller\SpeckleRhino
   # DOWNLOAD DYNAMO ARTIFACTS
   - ps: |
       $prjUrl = "$apiUrl/projects/speckleworks/speckledynamo/branch/master"
@@ -69,9 +66,9 @@ after_build :
       $jobId = $project.build.jobs[0].jobId
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
       $artifactFileName = $artifacts[0].fileName
-      $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
+      $localArtifactPath = "C:\projects\speckleinstaller\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
-      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleDynamo"
+      $dest = "C:\projects\speckleinstaller\SpeckleDynamo"
       New-Item -ItemType directory -Path $dest
       7z x -o$dest $localArtifactPath -r -aoa
   - ls C:\projects\speckleinstaller\SpeckleDynamo
