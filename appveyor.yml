@@ -38,7 +38,7 @@ after_build :
         "Content-type" = "application/json"
       }
   - ps: |
-      $prjUrl = '$apiUrl/projects/speckleworks/specklerhino/branch/master'
+      $prjUrl = "$apiUrl/projects/speckleworks/specklerhino/branch/master"
       $headers = @{
         "Authorization" = "Bearer $token"
         "Content-type" = "application/json"
@@ -55,7 +55,7 @@ after_build :
       7z x $localArtifactPath  -o$Env:APPVEYOR_BUILD_FOLDER\SpeckleRhino\Release\ -r
   # DOWNLOAD DYNAMO ARTIFACTS
   - ps: |
-      $prjUrl = '$apiUrl/projects/speckleworks/speckledynamo/branch/master'
+      $prjUrl = "$apiUrl/projects/speckleworks/speckledynamo/branch/master"
       $headers = @{
         "Authorization" = "Bearer $token"
         "Content-type" = "application/json"
