@@ -52,7 +52,8 @@ after_build :
       Write-Host $artifactFileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
-      7z x $localArtifactPath  -o$Env:APPVEYOR_BUILD_FOLDER\SpeckleRhino\Release\ -r
+      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRhino\Release\"
+      7z x $localArtifactPath  -o$dest -r
   # DOWNLOAD DYNAMO ARTIFACTS
   - ps: |
       $prjUrl = "$apiUrl/projects/speckleworks/speckledynamo/branch/master"
@@ -66,7 +67,8 @@ after_build :
       $artifactFileName = $artifacts[0].fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
-      7z x $localArtifactPath -o$Env:APPVEYOR_BUILD_FOLDER\SpeckleDynamo\SpeckleDynamo\bin\Release\Speckle for Dynamo\ -r
+      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleDynamo\SpeckleDynamo\bin\Release\Speckle for Dynamo\"
+      7z x $localArtifactPath  -o$dest -r
   # EXECUTE INNO
   - InnoSetup\ISCC.exe SpeckleInstaller.iss
 
