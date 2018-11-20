@@ -56,7 +56,7 @@ after_build :
       Write-Output "DESTINATION=$dest"
       7z x -o$dest $localArtifactPath -r -aoa
       Write-Output "Time taken unzipping: $((Get-Date).Subtract($start_time).Seconds) second(s)"
-  - ls C:\projects\speckleinstaller\SpeckleRhino
+  - ls
   # DOWNLOAD DYNAMO ARTIFACTS
   - ps: |
       $prjUrl = "$apiUrl/projects/speckleworks/speckledynamo/branch/master"
