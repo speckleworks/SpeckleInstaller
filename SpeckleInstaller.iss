@@ -1,8 +1,8 @@
 ;defining variables
 #define AppName      "Speckle"
 #define AppVersion GetFileVersion("SpeckleUpdater\bin\Release\SpeckleUpdater.exe")
-#define RhinoVersion  GetFileVersion("SpeckleRhino\Release\SpeckleRhinoConverter.dll")
-#define DynamoVersion  GetFileVersion("SpeckleDynamo\SpeckleDynamo\bin\Release\SpeckleDynamo.dll")
+#define RhinoVersion  GetFileVersion("SpeckleRhino\SpeckleRhinoConverter.dll")
+#define DynamoVersion  GetFileVersion("SpeckleDynamo\SpeckleDynamo.dll")
 #define AppPublisher "Speckle"
 #define AppURL       "https://speckle.works"
 
