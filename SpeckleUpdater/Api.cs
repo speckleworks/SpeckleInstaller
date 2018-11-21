@@ -44,12 +44,15 @@ namespace SpeckleUpdaterWpf
     {
       try
       {
-        var path = Path.Combine(Path.GetTempPath(), Globals.AppName, Globals.InstallerName);
+        var folder = Path.Combine(Path.GetTempPath(), Globals.AppName);
+        var path = Path.Combine(folder, Globals.InstallerName);
+        if (!Directory.Exists(folder))
+          Directory.CreateDirectory(folder);
 
         using (HttpClient client = new HttpClient())
         {
           client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-          client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("Speckle updater"));
+          client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("User-Agent", "speckle-updater"));
 
           using (var response = await client.GetAsync(url))
           {

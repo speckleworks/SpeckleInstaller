@@ -89,7 +89,8 @@ artifacts:
 
 deploy:
   release: Speckle-v$(appveyor_build_version)
-  description: 'Release description'
+  tag: v$(appveyor_build_version)
+  description: 'An even better Speckle!'
   provider: GitHub
   auth_token:
     secure: mxiydinHKH3TmtBeDKldgt7VD90uiOW/GCbUD70x5HMB7B7lWinN3A2tw2dnt17x # your encrypted token from GitHub

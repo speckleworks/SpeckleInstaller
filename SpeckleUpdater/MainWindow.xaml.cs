@@ -37,20 +37,23 @@ namespace SpeckleUpdaterWpf
       if (release == null)
       {
         this.Close();
+        return;
       }
 
       if (!UpdateAvailable(release))
       {
         this.Close();
+        return;
       }
 
       this.Show();
 
-      var installerPath = await Api.DownloadRelease(release.assets.First(x => x.name == Globals.InstallerName).url);
+      var installerPath = await Api.DownloadRelease(release.assets.First(x => x.name == Globals.InstallerName).browser_download_url);
 
       if (!File.Exists(installerPath))
       {
         this.Close();
+        return;
       }
 
       //launch the just downloaded installer
