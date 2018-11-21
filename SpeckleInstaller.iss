@@ -2,7 +2,7 @@
 #define AppName      "Speckle"
 #define AppVersion GetFileVersion("SpeckleUpdater\bin\Release\SpeckleUpdater.exe")
 #define RhinoVersion  GetFileVersion("SpeckleRhino\SpeckleRhinoConverter.dll")
-#define DynamoVersion  GetFileVersion("SpeckleDynamo\SpeckleDynamo.dll")
+#define DynamoVersion  GetFileVersion("SpeckleDynamo\bin\SpeckleDynamo.dll")
 #define AppPublisher "Speckle"
 #define AppURL       "https://speckle.works"
 
