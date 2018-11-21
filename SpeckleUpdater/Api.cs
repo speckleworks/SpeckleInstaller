@@ -1,12 +1,15 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
-using static SpeckleUpdater.GitHub;
+using static SpeckleUpdaterWpf.GitHub;
 
-namespace SpeckleUpdater
+namespace SpeckleUpdaterWpf
 {
   internal class Api
   {
@@ -18,6 +21,7 @@ namespace SpeckleUpdater
         using (var client = new HttpClient())
         {
           client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+          client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("User-Agent", "speckle-updater"));
 
           // get the latest build on master
           using (var response = await client.GetAsync(Globals.LatestReopEndpoint))
@@ -45,6 +49,7 @@ namespace SpeckleUpdater
         using (HttpClient client = new HttpClient())
         {
           client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+          client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("Speckle updater"));
 
           using (var response = await client.GetAsync(url))
           {

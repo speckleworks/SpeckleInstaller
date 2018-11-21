@@ -1,51 +1,64 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using static SpeckleUpdater.GitHub;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using static SpeckleUpdaterWpf.GitHub;
 
-namespace SpeckleUpdater
+namespace SpeckleUpdaterWpf
 {
-  internal class Program
+  /// <summary>
+  /// Interaction logic for MainWindow.xaml
+  /// </summary>
+  public partial class MainWindow : Window
   {
-    private static void Main(string[] args)
+    public MainWindow()
     {
-      try
-      {
-        Initialize();
-      }
-      catch (Exception e)
-      {
-        Console.Write(e.Message);
-      }
+      InitializeComponent();
+      this.Hide();
+      CheckForUpdates();
     }
 
-    private static async void Initialize()
+    private async void CheckForUpdates()
     {
       var release = await Api.GetLatestRelease();
 
       if (release == null)
       {
-        return;
+        this.Close();
       }
 
       if (!UpdateAvailable(release))
       {
-        return;
+        this.Close();
       }
+
+      this.Show();
 
       var installerPath = await Api.DownloadRelease(release.assets.First(x => x.name == Globals.InstallerName).url);
 
       if (!File.Exists(installerPath))
       {
-        return;
+        this.Close();
       }
 
       //launch the just downloaded installer
       Process.Start(installerPath, "/SP- /VERYSILENT /SUPPRESSMSGBOXES /NOICONS");
+      this.Close();
     }
 
-    private static bool UpdateAvailable(Release release)
+    private bool UpdateAvailable(Release release)
     {
       var latest = Version.Parse(release.tag_name.Replace("v", ""));
       var current = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
@@ -62,6 +75,5 @@ namespace SpeckleUpdater
 
       return true;
     }
-
   }
 }

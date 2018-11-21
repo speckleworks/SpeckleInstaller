@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeckleUpdater", "SpeckleUpdater\SpeckleUpdater.csproj", "{EB884B56-E49A-443E-9049-B8CBC16077E4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeckleUpdater", "SpeckleUpdater\SpeckleUpdater.csproj", "{26D97083-672D-49E4-84D6-70FA299A48EB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EB884B56-E49A-443E-9049-B8CBC16077E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB884B56-E49A-443E-9049-B8CBC16077E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB884B56-E49A-443E-9049-B8CBC16077E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB884B56-E49A-443E-9049-B8CBC16077E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26D97083-672D-49E4-84D6-70FA299A48EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26D97083-672D-49E4-84D6-70FA299A48EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26D97083-672D-49E4-84D6-70FA299A48EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26D97083-672D-49E4-84D6-70FA299A48EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
