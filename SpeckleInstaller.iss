@@ -5,7 +5,7 @@
 #define DynamoVersion  GetFileVersion("SpeckleDynamo\bin\SpeckleDynamo.dll")
 #define AppPublisher "Speckle"
 #define AppURL       "https://speckle.works"
-
+#define SpeckleFolder "{localappdata}\Speckle"      
 #define UpdaterFilename       "SpeckleUpdater.exe"
 
 [Setup]
@@ -17,17 +17,17 @@ AppPublisher={#AppPublisher}
 AppPublisherURL={#AppURL}
 AppSupportURL={#AppURL}
 AppUpdatesURL={#AppURL}
-DefaultDirName={localappdata}\Speckle
+DefaultDirName={#SpeckleFolder}
 DisableDirPage=yes
 DefaultGroupName={#AppName}
 DisableProgramGroupPage=yes
 DisableWelcomePage=no
 OutputDir="."
 OutputBaseFilename=Speckle
-;SetupIconFile={#Repository}\Assets\icon.ico
+SetupIconFile=Assets\speckle.ico
 Compression=lzma
 SolidCompression=yes
-;WizardImageFile={#Repository}\Assets\bcfier-banner.bmp
+;WizardImageFile=Assets\speckle.bmp
 ChangesAssociations=yes
 PrivilegesRequired=lowest
 
@@ -45,22 +45,22 @@ Name: "{app}"; Permissions: everyone-full
 
 [Files]
 ;updater
-Source: "SpeckleUpdater\bin\Release\*"; DestDir: "{userappdata}\Speckle\"; Flags: ignoreversion recursesubdirs;
+Source: "SpeckleUpdater\bin\Release\*"; DestDir: "{#SpeckleFolder}"; Flags: ignoreversion recursesubdirs;
 
 ;rhino+gh                                                                                                                                      
-Source: "SpeckleRhino\*"; DestDir: "{userappdata}\McNeel\Rhinoceros\6.0\Plug-ins\Speckle Rhino Plugin (512d9705-6f92-49ca-a606-d6d5c1ac6aa2)\{#RhinoVersion}"; Flags: ignoreversion recursesubdirs; Components: gh  
+;Source: "SpeckleRhino\*"; DestDir: "{userappdata}\McNeel\Rhinoceros\6.0\Plug-ins\Speckle Rhino Plugin (512d9705-6f92-49ca-a606-d6d5c1ac6aa2)\{#RhinoVersion}"; Flags: ignoreversion recursesubdirs; Components: gh  
 
 ;dynamo
-Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
-Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+;Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+;Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
 
 ;excel                                                                                                                                    
 ;Source: "{#Repository}\Arup.Compute.Excel\bin\Release\Arup.Compute.Excel-AddIn-packed.xll"; DestDir: "{userappdata}\Microsoft\AddIns\"; Flags: ignoreversion; Components: excel   
 
 
 [Icons]
-Name: "{group}\Check for updates"; Filename: "{app}\{#UpdaterFilename}"
-Name: "{userappdata}\Microsoft\Windows\Start Menu\Programs\Startup\Speckle"; Filename: "{app}\{#UpdaterFilename}"
+Name: "{group}\Check for updates"; Filename: "{#SpeckleFolder}\{#UpdaterFilename}"
+Name: "{userappdata}\Microsoft\Windows\Start Menu\Programs\Startup\Speckle"; Filename: "{#SpeckleFolder}\{#UpdaterFilename}"
 Name: "{group}\{cm:UninstallProgram,{#AppName}}"; Filename: "{uninstallexe}"
 ;Name: "{commondesktop}\{#AppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
