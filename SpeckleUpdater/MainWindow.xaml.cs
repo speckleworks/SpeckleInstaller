@@ -66,7 +66,7 @@ namespace SpeckleUpdater
       var latest = Version.Parse(release.tag_name.Replace("v", ""));
       var current = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 
-      if (current.CompareTo(latest) > 0)
+      if (current.CompareTo(latest) >= 0)
       {
         return false;
       }
