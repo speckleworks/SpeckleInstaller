@@ -59,5 +59,15 @@ namespace SpeckleUpdater.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon speckle {
+            get {
+                object obj = ResourceManager.GetObject("speckle", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

@@ -7,9 +7,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using static SpeckleUpdaterWpf.GitHub;
+using static SpeckleUpdater.GitHub;
 
-namespace SpeckleUpdaterWpf
+namespace SpeckleUpdater
 {
   internal class Api
   {
