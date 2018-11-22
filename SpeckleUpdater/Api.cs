@@ -40,12 +40,11 @@ namespace SpeckleUpdater
       }
     }
 
-    internal static async Task<string> DownloadRelease(string url)
+    internal static async Task<string> DownloadRelease(string url, string folder, string path)
     {
       try
       {
-        var folder = Path.Combine(Path.GetTempPath(), Globals.AppName);
-        var path = Path.Combine(folder, Globals.InstallerName);
+
         if (!Directory.Exists(folder))
           Directory.CreateDirectory(folder);
 

@@ -20,7 +20,7 @@
       <Image Width="300" Source="logo.png" />
       <Label
         HorizontalAlignment="Center"
-        Content="Updating..."
+        Content="Checking for updates..."
         Foreground="White" />
     </StackPanel>
 

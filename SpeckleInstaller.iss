@@ -27,16 +27,17 @@ OutputBaseFilename=Speckle
 SetupIconFile=Assets\speckle.ico
 Compression=lzma
 SolidCompression=yes
-;WizardImageFile=Assets\speckle.bmp
+WizardImageFile=Assets\installer.bmp
 ChangesAssociations=yes
 PrivilegesRequired=lowest
+VersionInfoVersion={#AppVersion}
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Components]
-Name: dynamo; Description: Speckle for Dynamo 2.0 v{#DynamoVersion}; Types: full 
-Name: gh; Description: Speckle for Rhino+Grasshopper v{#RhinoVersion};  Types: full
+Name: dynamo; Description: Speckle for Dynamo 2.0 - v{#DynamoVersion}; Types: full 
+Name: gh; Description: Speckle for Rhino 6 & Grasshopper - v{#RhinoVersion};  Types: full
 ;Name: excel; Description: Speckle for Revit;  Types: full
 
 
@@ -55,7 +56,11 @@ Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.0\packa
 Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
 
 ;excel                                                                                                                                    
-;Source: "{#Repository}\Arup.Compute.Excel\bin\Release\Arup.Compute.Excel-AddIn-packed.xll"; DestDir: "{userappdata}\Microsoft\AddIns\"; Flags: ignoreversion; Components: excel   
+;Source: "{#Repository}\Arup.Compute.Excel\bin\Release\Arup.Compute.Excel-AddIn-packed.xll"; DestDir: "{userappdata}\Microsoft\AddIns\"; Flags: ignoreversion; Components: excel  
+
+[Registry]
+Root: HKCU; Subkey: "SOFTWARE\McNeel\Rhinoceros\6.0\Plug-ins\512d9705-6f92-49ca-a606-d6d5c1ac6aa2"; ValueType: string; ValueName: "Name"; ValueData: "Speckle";
+Root: HKCU; Subkey: "SOFTWARE\McNeel\Rhinoceros\6.0\Plug-ins\512d9705-6f92-49ca-a606-d6d5c1ac6aa2"; ValueType: string; ValueName: "FileName"; ValueData: "{userappdata}\McNeel\Rhinoceros\6.0\Plug-ins\Speckle Rhino Plugin (512d9705-6f92-49ca-a606-d6d5c1ac6aa2)\{#RhinoVersion}\SpeckleWinR6.rhp";  
 
 
 [Icons]
@@ -63,9 +68,6 @@ Name: "{group}\Check for updates"; Filename: "{#SpeckleFolder}\{#UpdaterFilename
 Name: "{userappdata}\Microsoft\Windows\Start Menu\Programs\Startup\Speckle"; Filename: "{#SpeckleFolder}\{#UpdaterFilename}"
 Name: "{group}\{cm:UninstallProgram,{#AppName}}"; Filename: "{uninstallexe}"
 ;Name: "{commondesktop}\{#AppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
-
-;[Registry]
-;Root: HKCU; Subkey: "SOFTWARE\Microsoft\Office\16.0\Excel\Options"; ValueType: string; ValueName: "OPEN"; ValueData: "/R ""Arup.Compute.Excel-AddIn-packed.xll""";
 
 ;checks if minimun requirements are met
 [Code]

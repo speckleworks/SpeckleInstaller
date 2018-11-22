@@ -3,17 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using static SpeckleUpdater.GitHub;
 
 namespace SpeckleUpdater
@@ -48,16 +38,27 @@ namespace SpeckleUpdater
 
       this.Show();
 
-      var installerPath = await Api.DownloadRelease(release.assets.First(x => x.name == Globals.InstallerName).browser_download_url);
+      var folder = Path.Combine(Path.GetTempPath(), Globals.AppName);
+      var path = System.IO.Path.Combine(folder, Globals.InstallerName);
 
-      if (!File.Exists(installerPath))
+      //don't download if already there
+      if(!File.Exists(path) || !IsSameVersion(release.tag_name))
+      {
+        await Api.DownloadRelease(release.assets.First(x => x.name == Globals.InstallerName).browser_download_url, folder, path);
+      }
+
+      if (!File.Exists(path))
       {
         this.Close();
         return;
       }
 
-      //launch the just downloaded installer
-      Process.Start(installerPath, "/SP- /VERYSILENT /SUPPRESSMSGBOXES /NOICONS");
+      MessageBoxResult response = MessageBox.Show("Speckle " + release.tag_name + " is available!\nDo you want to install it now?", "Speckle Updater (~˘▾˘)~", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
+      if(response == MessageBoxResult.Yes)
+      {
+        //launch the installer
+        Process.Start(path);
+      }
       this.Close();
     }
 
@@ -77,6 +78,17 @@ namespace SpeckleUpdater
       }
 
       return true;
+    }
+
+    private bool IsSameVersion(string version)
+    {
+      var current = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+      var v = Version.Parse(version.Replace("v", ""));
+      if (current.CompareTo(v) == 0)
+      {
+        return true;
+      }
+      return false;
     }
   }
 }
