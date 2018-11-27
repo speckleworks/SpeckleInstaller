@@ -50,6 +50,7 @@ namespace SpeckleUpdater
 
         using (HttpClient client = new HttpClient())
         {
+          client.Timeout = TimeSpan.FromMinutes(42);
           client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
           client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("User-Agent", "speckle-updater"));
 
