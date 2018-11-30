@@ -15,14 +15,21 @@
   WindowStartupLocation="CenterScreen"
   WindowStyle="None"
   mc:Ignorable="d">
-  <Grid>
-    <StackPanel Orientation="Vertical">
-      <Image Width="300" Source="logo.png" />
-      <Label
-        HorizontalAlignment="Center"
-        Content="Checking for updates..."
-        Foreground="White" />
-    </StackPanel>
-
-  </Grid>
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <Image Width="300" Source="logo.png" />
+            <Label
+                HorizontalAlignment="Center"
+                Content="Checking for updates..."
+                Foreground="White" />
+        </StackPanel>
+        <Label
+            HorizontalAlignment="Right"
+            Content="X"
+            Foreground="White" 
+            Margin="0,5,5,0"
+            Width="20"
+            VerticalAlignment="Top"
+            ContentElement.MouseDown="X_Label_MouseDown"/>
+    </Grid>
 </Window>

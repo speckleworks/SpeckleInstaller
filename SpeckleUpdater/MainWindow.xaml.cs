@@ -90,5 +90,10 @@ namespace SpeckleUpdater
       }
       return false;
     }
+
+    private void X_Label_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+       this.Close();
+    }
   }
 }
