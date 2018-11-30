@@ -31,6 +31,7 @@ WizardImageFile=Assets\installer.bmp
 ChangesAssociations=yes
 PrivilegesRequired=lowest
 VersionInfoVersion={#AppVersion}
+InfoBeforeFile=InstallationReadme.txt
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
