@@ -31,6 +31,7 @@ WizardImageFile=Assets\installer.bmp
 ChangesAssociations=yes
 PrivilegesRequired=lowest
 VersionInfoVersion={#AppVersion}
+LicenseFile=LICENSE
 InfoBeforeFile=InstallationReadme.txt
 
 [Languages]
