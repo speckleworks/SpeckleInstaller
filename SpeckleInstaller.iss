@@ -36,10 +36,14 @@ VersionInfoVersion={#AppVersion}
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Components]
+Name: updater; Description: SpeckleUpdater - v{#AppVersion}; Types: full custom; Flags: fixed 
 Name: dynamo; Description: Speckle for Dynamo 2.0 - v{#DynamoVersion}; Types: full 
 Name: gh; Description: Speckle for Rhino 6 & Grasshopper - v{#RhinoVersion};  Types: full
 ;Name: excel; Description: Speckle for Revit;  Types: full
 
+[Types]
+Name: "full"; Description: "Full installation"
+Name: "custom"; Description: "Custom installation"; Flags: iscustom
 
 [Dirs]
 Name: "{app}"; Permissions: everyone-full 
