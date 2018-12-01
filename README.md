@@ -11,3 +11,8 @@ Speckle desktop client installer for:
 - Dynamo
 
 The installer does not require admin privileges and auto updates!
+
+## Installer tool
+This project uses [Inno Setup](http://www.jrsoftware.org/) to create the installer.
+
+If you'd like to contribute to the project, please first head over to [Inno Setup download page](http://www.jrsoftware.org/isdl.php) and install it. 
