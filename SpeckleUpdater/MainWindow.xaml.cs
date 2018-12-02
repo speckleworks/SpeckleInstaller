@@ -7,13 +7,16 @@ using System.Windows;
 using static SpeckleUpdater.GitHub;
 
 namespace SpeckleUpdater
-{
+{ 
   /// <summary>
   /// Interaction logic for MainWindow.xaml
   /// </summary>
   public partial class MainWindow : Window
-  {
-    public MainWindow()
+{
+    
+  private string _path = "";
+
+  public MainWindow()
     {
       InitializeComponent();
       this.Hide();
@@ -36,30 +39,22 @@ namespace SpeckleUpdater
         return;
       }
 
-      this.Show();
-
       var folder = Path.Combine(Path.GetTempPath(), Globals.AppName);
-      var path = System.IO.Path.Combine(folder, Globals.InstallerName);
+      _path = Path.Combine(folder, Globals.InstallerName);
 
       //don't download if already there
-      if(!File.Exists(path) || !IsSameVersion(release.tag_name))
+      if (!File.Exists(_path) || !AlreadyDownloaded(release.tag_name))
       {
-        await Api.DownloadRelease(release.assets.First(x => x.name == Globals.InstallerName).browser_download_url, folder, path);
+        await Api.DownloadRelease(release.assets.First(x => x.name == Globals.InstallerName).browser_download_url, folder, _path);
       }
-
-      if (!File.Exists(path))
+      //double check!
+      if (!File.Exists(_path))
       {
         this.Close();
         return;
       }
-
-      MessageBoxResult response = MessageBox.Show("Speckle " + release.tag_name + " is available!\nDo you want to install it now?", "Speckle Updater (~˘▾˘)~", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.Yes);
-      if(response == MessageBoxResult.Yes)
-      {
-        //launch the installer
-        Process.Start(path);
-      }
-      this.Close();
+      this.Show();
+      UpdateMessage.Text = $"Speckle {release.tag_name} is available! Do you want to install it now?";
     }
 
     private bool UpdateAvailable(Release release)
@@ -80,15 +75,28 @@ namespace SpeckleUpdater
       return true;
     }
 
-    private bool IsSameVersion(string version)
+
+    private bool AlreadyDownloaded(string version)
     {
-      var current = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+      FileVersionInfo fileInfo = FileVersionInfo.GetVersionInfo(_path);
       var v = Version.Parse(version.Replace("v", ""));
+      var current = Version.Parse(fileInfo.FileVersion);
       if (current.CompareTo(v) == 0)
       {
         return true;
       }
       return false;
+    }
+
+    private void Yes_Click(object sender, RoutedEventArgs e)
+    {
+      Process.Start(_path);
+      this.Close();
+    }
+
+    private void No_Click(object sender, RoutedEventArgs e)
+    {
+      this.Close();
     }
   }
 }

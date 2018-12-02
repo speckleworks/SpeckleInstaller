@@ -36,7 +36,7 @@ VersionInfoVersion={#AppVersion}
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Components]
-Name: updater; Description: SpeckleUpdater - v{#AppVersion}; Types: full custom; Flags: fixed 
+Name: updater; Description: Speckle Updater - v{#AppVersion}; Types: full custom; Flags: fixed 
 Name: dynamo; Description: Speckle for Dynamo 2.0 - v{#DynamoVersion}; Types: full 
 Name: gh; Description: Speckle for Rhino 6 & Grasshopper - v{#RhinoVersion};  Types: full
 ;Name: excel; Description: Speckle for Revit;  Types: full
@@ -44,6 +44,9 @@ Name: gh; Description: Speckle for Rhino 6 & Grasshopper - v{#RhinoVersion};  Ty
 [Types]
 Name: "full"; Description: "Full installation"
 Name: "custom"; Description: "Custom installation"; Flags: iscustom
+
+[Tasks]
+Name: updates; Description: "Check for updates at startup, make sure I always have the best Speckle!";
 
 [Dirs]
 Name: "{app}"; Permissions: everyone-full 
@@ -69,7 +72,7 @@ Root: HKCU; Subkey: "SOFTWARE\McNeel\Rhinoceros\6.0\Plug-ins\512d9705-6f92-49ca-
 
 [Icons]
 Name: "{group}\Check for updates"; Filename: "{#SpeckleFolder}\{#UpdaterFilename}"
-Name: "{userappdata}\Microsoft\Windows\Start Menu\Programs\Startup\Speckle"; Filename: "{#SpeckleFolder}\{#UpdaterFilename}"
+Name: "{userappdata}\Microsoft\Windows\Start Menu\Programs\Startup\Speckle"; Filename: "{#SpeckleFolder}\{#UpdaterFilename}"; Tasks: updates
 Name: "{group}\{cm:UninstallProgram,{#AppName}}"; Filename: "{uninstallexe}"
 ;Name: "{commondesktop}\{#AppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
