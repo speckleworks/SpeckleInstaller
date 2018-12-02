@@ -53,8 +53,17 @@ namespace SpeckleUpdater
         this.Close();
         return;
       }
-      this.Show();
-      UpdateMessage.Text = $"Speckle {release.tag_name} is available! Do you want to install it now?";
+
+      if(ProcessIsRunning("dynamo") || ProcessIsRunning("rhino") || ProcessIsRunning("revit"))
+      {
+        this.Show();
+        UpdateMessage.Text = $"Speckle {release.tag_name} is available! Do you want to install it now?";
+      }
+      else
+      {
+        //silent install
+        Process.Start(_path, "/SP- /VERYSILENT /SUPPRESSMSGBOXES");
+      }
     }
 
     private bool UpdateAvailable(Release release)
@@ -73,6 +82,17 @@ namespace SpeckleUpdater
       }
 
       return true;
+    }
+
+    private bool ProcessIsRunning(string name)
+    {
+      var processes = Process.GetProcesses();
+      foreach(var p in processes)
+      {
+        if (p.ProcessName.ToLowerInvariant().Contains(name))
+          return true;
+      }
+      return false;
     }
 
 

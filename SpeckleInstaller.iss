@@ -46,7 +46,7 @@ Name: "full"; Description: "Full installation"
 Name: "custom"; Description: "Custom installation"; Flags: iscustom
 
 [Tasks]
-Name: updates; Description: "Check for updates at startup, make sure I always have the best Speckle!";
+Name: updates; Description: "Auto update, make sure I always have the best Speckle!";
 
 [Dirs]
 Name: "{app}"; Permissions: everyone-full 
