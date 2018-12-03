@@ -4,19 +4,18 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using static SpeckleUpdater.GitHub;
 
 namespace SpeckleUpdater
-{ 
+{
   /// <summary>
   /// Interaction logic for MainWindow.xaml
   /// </summary>
   public partial class MainWindow : Window
-{
-    
-  private string _path = "";
+  {
 
-  public MainWindow()
+    private string _path = "";
+
+    public MainWindow()
     {
       InitializeComponent();
       this.Hide();
@@ -43,9 +42,9 @@ namespace SpeckleUpdater
       _path = Path.Combine(folder, Globals.InstallerName);
 
       //don't download if already there
-      if (!File.Exists(_path) || !AlreadyDownloaded(release.tag_name))
+      if (!File.Exists(_path) || !AlreadyDownloaded(release.Name))
       {
-        await Api.DownloadRelease(release.assets.First(x => x.name == Globals.InstallerName).browser_download_url, folder, _path);
+        await Api.DownloadRelease(release.Url, folder, _path);
       }
       //double check!
       if (!File.Exists(_path))
@@ -54,10 +53,10 @@ namespace SpeckleUpdater
         return;
       }
 
-      if(ProcessIsRunning("dynamo") || ProcessIsRunning("rhino") || ProcessIsRunning("revit"))
+      if (ProcessIsRunning("dynamo") || ProcessIsRunning("rhino") || ProcessIsRunning("revit"))
       {
         this.Show();
-        UpdateMessage.Text = $"Speckle {release.tag_name} is available! Do you want to install it now?";
+        UpdateMessage.Text = $"{Globals.AppName} {release.Name} is available! Do you want to install it now?";
       }
       else
       {
@@ -68,15 +67,10 @@ namespace SpeckleUpdater
 
     private bool UpdateAvailable(Release release)
     {
-      var latest = Version.Parse(release.tag_name.Replace("v", ""));
+      var latest = Version.Parse(release.Name.Replace("v", ""));
       var current = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
 
       if (current.CompareTo(latest) >= 0)
-      {
-        return false;
-      }
-
-      if (!release.assets.Any(x => x.name == Globals.InstallerName))
       {
         return false;
       }
@@ -87,14 +81,13 @@ namespace SpeckleUpdater
     private bool ProcessIsRunning(string name)
     {
       var processes = Process.GetProcesses();
-      foreach(var p in processes)
+      foreach (var p in processes)
       {
         if (p.ProcessName.ToLowerInvariant().Contains(name))
           return true;
       }
       return false;
     }
-
 
     private bool AlreadyDownloaded(string version)
     {

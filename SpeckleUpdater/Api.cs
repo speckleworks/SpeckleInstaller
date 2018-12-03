@@ -16,6 +16,7 @@ namespace SpeckleUpdater
 
     internal static async Task<Release> GetLatestRelease()
     {
+      Release release = null;
       try
       {
         using (var client = new HttpClient())
@@ -28,7 +29,13 @@ namespace SpeckleUpdater
           {
             response.EnsureSuccessStatusCode();
 
-            var release = JsonConvert.DeserializeObject<Release>(await response.Content.ReadAsStringAsync());
+            var githubRelease = JsonConvert.DeserializeObject<GitHubRelease>(await response.Content.ReadAsStringAsync());
+            try
+            {
+              release = new Release(githubRelease.tag_name, githubRelease.assets.First(x => x.name == Globals.InstallerName).browser_download_url);
+            }
+            catch (Exception e)
+            { }
             return release;
           }
         }

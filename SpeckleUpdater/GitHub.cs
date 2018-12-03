@@ -69,7 +69,7 @@ namespace SpeckleUpdater
       public string browser_download_url { get; set; }
     }
 
-    public class Release
+    public class GitHubRelease
     {
       public string url { get; set; }
       public string assets_url { get; set; }
