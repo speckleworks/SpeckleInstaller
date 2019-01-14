@@ -1,11 +1,9 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using static SpeckleUpdater.GitHub;
 
@@ -35,15 +33,16 @@ namespace SpeckleUpdater
               release = new Release(githubRelease.tag_name, githubRelease.assets.First(x => x.name == Globals.InstallerName).browser_download_url);
             }
             catch (Exception e)
-            { }
+            {
+              throw e;
+            }
             return release;
           }
         }
       }
       catch (Exception e)
       {
-        Console.Write("Check for updates failed: " + e.Message);
-        return null;
+        throw new Exception("Check for updates failed.", e);
       }
     }
 
@@ -53,7 +52,9 @@ namespace SpeckleUpdater
       {
 
         if (!Directory.Exists(folder))
+        {
           Directory.CreateDirectory(folder);
+        }
 
         using (HttpClient client = new HttpClient())
         {
@@ -88,8 +89,7 @@ namespace SpeckleUpdater
 
       catch (Exception e)
       {
-        Console.Write("Release download failed: " + e.Message);
-        return null;
+        throw new Exception("Release download failed.", e);
       }
 
     }
