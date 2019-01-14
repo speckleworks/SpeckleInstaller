@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Windows;
 
 namespace SpeckleUpdater
@@ -14,12 +12,20 @@ namespace SpeckleUpdater
   {
 
     private string _path = "";
+    private string folder = Path.Combine(Path.GetTempPath(), Globals.AppName);
 
     public MainWindow()
     {
-      InitializeComponent();
-      this.Hide();
-      CheckForUpdates();
+      try
+      {
+        InitializeComponent();
+        Hide();
+        CheckForUpdates();
+      }
+      catch (Exception ex)
+      {
+        File.WriteAllText(Path.Combine(folder, "error_log.txt"), ex.ToString());
+      }
     }
 
     private async void CheckForUpdates()
@@ -28,17 +34,17 @@ namespace SpeckleUpdater
 
       if (release == null)
       {
-        this.Close();
+        Close();
         return;
       }
 
       if (!UpdateAvailable(release))
       {
-        this.Close();
+        Close();
         return;
       }
 
-      var folder = Path.Combine(Path.GetTempPath(), Globals.AppName);
+
       _path = Path.Combine(folder, Globals.InstallerName);
 
       //don't download if already there
@@ -49,13 +55,13 @@ namespace SpeckleUpdater
       //double check!
       if (!File.Exists(_path))
       {
-        this.Close();
+        Close();
         return;
       }
 
       if (ProcessIsRunning("dynamo") || ProcessIsRunning("rhino") || ProcessIsRunning("revit"))
       {
-        this.Show();
+        Show();
         UpdateMessage.Text = $"{Globals.AppName} {release.Name} is available! Do you want to install it now?";
       }
       else
@@ -84,7 +90,9 @@ namespace SpeckleUpdater
       foreach (var p in processes)
       {
         if (p.ProcessName.ToLowerInvariant().Contains(name))
+        {
           return true;
+        }
       }
       return false;
     }
@@ -92,24 +100,31 @@ namespace SpeckleUpdater
     private bool AlreadyDownloaded(string version)
     {
       FileVersionInfo fileInfo = FileVersionInfo.GetVersionInfo(_path);
-      var v = Version.Parse(version.Replace("v", ""));
-      var current = Version.Parse(fileInfo.FileVersion);
-      if (current.CompareTo(v) == 0)
+      try
       {
-        return true;
+        var v = Version.Parse(version.Replace("v", ""));
+        var current = Version.Parse(fileInfo.FileVersion);
+        if (current.CompareTo(v) == 0)
+        {
+          return true;
+        }
+        return false;
       }
-      return false;
+      catch
+      {
+        throw new Exception("Could not parse version!");
+      }
     }
 
     private void Yes_Click(object sender, RoutedEventArgs e)
     {
       Process.Start(_path);
-      this.Close();
+      Close();
     }
 
     private void No_Click(object sender, RoutedEventArgs e)
     {
-      this.Close();
+      Close();
     }
   }
 }
