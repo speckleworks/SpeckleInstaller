@@ -7,11 +7,12 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   Title="Speckle updater"
   Width="380"
-  Height="380"
+  MinHeight="300"
   Background="#007fff"
   BorderThickness="0"
   Icon="speckle.ico"
   ResizeMode="NoResize"
+  SizeToContent="Height"
   WindowStartupLocation="CenterScreen"
   WindowStyle="None"
   mc:Ignorable="d">
@@ -23,23 +24,37 @@
         Width="160"
         HorizontalAlignment="Center"
         Foreground="White"
-        Text="Speckle v1.0.0.0 is available! Do you want to install it now?"
+        Text="Checking for updates..."
         TextAlignment="Center"
         TextWrapping="Wrap" />
 
       <Button
+        Name="YesBtn"
         Margin="10,15,10,10"
         Click="Yes_Click"
         Content="YES!"
         FontWeight="Bold"
         Foreground="White"
-        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
+        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+        Visibility="Collapsed" />
       <Button
+        Name="OkBtn"
+        Margin="10,15,10,10"
+        Click="No_Click"
+        Content="OK!"
+        FontWeight="Bold"
+        Foreground="White"
+        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+        Visibility="Collapsed" />
+      <Button
+        Name="NoBtn"
         Margin="0,0,0,20"
         Click="No_Click"
         Content="No, I want an old Speckle"
         Foreground="White"
-        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}" />
+        Style="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+        Visibility="Collapsed" />
+
 
     </StackPanel>
 

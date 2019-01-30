@@ -11,21 +11,27 @@ namespace SpeckleUpdater
   public partial class MainWindow : Window
   {
 
+    private bool _showProgress = false;
     private string _path = "";
     private string folder = Path.Combine(Path.GetTempPath(), Globals.AppName);
 
-    public MainWindow()
+    public MainWindow(bool showProgress)
     {
       try
       {
+        _showProgress = showProgress;
         InitializeComponent();
-        Hide();
+        if(!_showProgress)
+          Hide();
         CheckForUpdates();
       }
       catch (Exception ex)
       {
         File.WriteAllText(Path.Combine(folder, "error_log.txt"), ex.ToString());
       }
+
+      System.Threading.Thread.Sleep(5000);
+
     }
 
     private async void CheckForUpdates()
@@ -34,40 +40,48 @@ namespace SpeckleUpdater
 
       if (release == null)
       {
-        Close();
-        return;
+          UpdateMessage.Text = $"You already have the latest {Globals.AppName}! {release.Name}";
+          OkBtn.Visibility = Visibility.Visible;
+        //Close();
       }
 
-      if (!UpdateAvailable(release))
+      else if (!UpdateAvailable(release))
       {
-        Close();
-        return;
+          UpdateMessage.Text = $"You already have the latest {Globals.AppName}! {release.Name}";
+          OkBtn.Visibility = Visibility.Visible;
+        //Close();
       }
 
-
-      _path = Path.Combine(folder, Globals.InstallerName);
-
-      //don't download if already there
-      if (!File.Exists(_path) || !AlreadyDownloaded(release.Name))
-      {
-        await Api.DownloadRelease(release.Url, folder, _path);
-      }
-      //double check!
-      if (!File.Exists(_path))
-      {
-        Close();
-        return;
-      }
-
-      if (ProcessIsRunning("dynamo") || ProcessIsRunning("rhino") || ProcessIsRunning("revit"))
-      {
-        Show();
-        UpdateMessage.Text = $"{Globals.AppName} {release.Name} is available! Do you want to install it now?";
-      }
+      //get latest version
       else
       {
-        //silent install
-        Process.Start(_path, "/SP- /VERYSILENT /SUPPRESSMSGBOXES");
+        _path = Path.Combine(folder, Globals.InstallerName);
+
+        //don't download if already there
+        if (!File.Exists(_path) || !AlreadyDownloaded(release.Name))
+        {
+          await Api.DownloadRelease(release.Url, folder, _path);
+        }
+
+        //double check!
+        if (!File.Exists(_path))
+        {
+          UpdateMessage.Text = $"Something went wrong, try again later... ಥ_ಥ";
+          OkBtn.Visibility = Visibility.Visible;
+        }
+
+        if (ProcessIsRunning("dynamo") || ProcessIsRunning("rhino") || ProcessIsRunning("revit") || _showProgress)
+        {
+          Show();
+          YesBtn.Visibility = Visibility.Visible;
+          NoBtn.Visibility = Visibility.Visible;
+          UpdateMessage.Text = $"{Globals.AppName} {release.Name} is available! Do you want to install it now?";
+        }
+        else
+        {
+          //silent install
+          Process.Start(_path, "/SP- /VERYSILENT /SUPPRESSMSGBOXES");
+        }
       }
     }
 
