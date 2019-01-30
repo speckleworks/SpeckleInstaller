@@ -17,22 +17,25 @@ namespace SpeckleUpdater
 
     public MainWindow(bool showProgress)
     {
+      _showProgress = showProgress;
+      InitializeComponent();
       try
       {
-        _showProgress = showProgress;
-        InitializeComponent();
-        if(!_showProgress)
+        if (!_showProgress)
+        {
           Hide();
+        }
+
         CheckForUpdates();
       }
       catch (Exception ex)
       {
         File.WriteAllText(Path.Combine(folder, "error_log.txt"), ex.ToString());
+        System.Threading.Thread.Sleep(2000);
+        Close();
       }
-
-      System.Threading.Thread.Sleep(5000);
-
     }
+
 
     private async void CheckForUpdates()
     {
@@ -40,16 +43,22 @@ namespace SpeckleUpdater
 
       if (release == null)
       {
-          UpdateMessage.Text = $"You already have the latest {Globals.AppName}! {release.Name}";
-          OkBtn.Visibility = Visibility.Visible;
-        //Close();
+        UpdateMessage.Text = $"You already have the latest {Globals.AppName}! {release.Name}";
+        OkBtn.Visibility = Visibility.Visible;
+        if (!_showProgress)
+        {
+          Close();
+        }
       }
 
       else if (!UpdateAvailable(release))
       {
-          UpdateMessage.Text = $"You already have the latest {Globals.AppName}! {release.Name}";
-          OkBtn.Visibility = Visibility.Visible;
-        //Close();
+        UpdateMessage.Text = $"You already have the latest {Globals.AppName}! {release.Name}";
+        OkBtn.Visibility = Visibility.Visible;
+        if (!_showProgress)
+        {
+          Close();
+        }
       }
 
       //get latest version
@@ -70,7 +79,7 @@ namespace SpeckleUpdater
           OkBtn.Visibility = Visibility.Visible;
         }
 
-        if (ProcessIsRunning("dynamo") || ProcessIsRunning("rhino") || ProcessIsRunning("revit") || _showProgress)
+        if (IsProcessRunning("dynamo") || IsProcessRunning("rhino") || IsProcessRunning("revit") || _showProgress)
         {
           Show();
           YesBtn.Visibility = Visibility.Visible;
@@ -81,6 +90,7 @@ namespace SpeckleUpdater
         {
           //silent install
           Process.Start(_path, "/SP- /VERYSILENT /SUPPRESSMSGBOXES");
+          Close();
         }
       }
     }
@@ -98,7 +108,7 @@ namespace SpeckleUpdater
       return true;
     }
 
-    private bool ProcessIsRunning(string name)
+    private bool IsProcessRunning(string name)
     {
       var processes = Process.GetProcesses();
       foreach (var p in processes)
