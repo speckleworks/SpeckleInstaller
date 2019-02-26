@@ -37,10 +37,10 @@ VersionInfoVersion={#AppVersion}
 Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Components]
-Name: updater; Description: Speckle Updater - v{#AppVersion}; Types: full custom; Flags: fixed 
+Name: updater; Description: Speckle Updater - v{#AppVersion}; Types: full custom; Flags: fixed
+Name: coregeometry; Description: Speckle Core object model (install it for backwards compatibility) - v{#CoreGeometryVersion};  Types: full
 Name: dynamo; Description: Speckle for Dynamo 2.0 - v{#DynamoVersion}; Types: full 
 Name: gh; Description: Speckle for Rhino 6 & Grasshopper - v{#RhinoVersion};  Types: full
-Name: coregeometry; Description: Speckle Core object model (mandatory for backwards compatibility) - v{#CoreGeometryVersion};  Types: full; Flags: fixed 
 ;Name: excel; Description: Speckle for Revit;  Types: full
 
 [Types]
