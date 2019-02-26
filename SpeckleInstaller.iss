@@ -3,6 +3,7 @@
 #define AppVersion GetFileVersion("SpeckleUpdater\bin\Release\SpeckleUpdater.exe")
 #define RhinoVersion  GetFileVersion("SpeckleRhino\SpeckleRhinoConverter.dll")
 #define DynamoVersion  GetFileVersion("SpeckleDynamo\bin\SpeckleDynamo.dll")
+#define CoreGeometryVersion  GetFileVersion("SpeckleCoreGeometry\SpeckleCoreGeometry.dll")
 #define AppPublisher "Speckle"
 #define AppURL       "https://speckle.works"
 #define SpeckleFolder "{localappdata}\Speckle"      
@@ -39,6 +40,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: updater; Description: Speckle Updater - v{#AppVersion}; Types: full custom; Flags: fixed 
 Name: dynamo; Description: Speckle for Dynamo 2.0 - v{#DynamoVersion}; Types: full 
 Name: gh; Description: Speckle for Rhino 6 & Grasshopper - v{#RhinoVersion};  Types: full
+Name: coregeometry; Description: Speckle Core object model - v{#CoreGeometryVersion};  Types: full
 ;Name: excel; Description: Speckle for Revit;  Types: full
 
 [Types]
@@ -64,6 +66,15 @@ Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.0\packag
 
 ;excel                                                                                                                                    
 ;Source: "{#Repository}\Arup.Compute.Excel\bin\Release\Arup.Compute.Excel-AddIn-packed.xll"; DestDir: "{userappdata}\Microsoft\AddIns\"; Flags: ignoreversion; Components: excel  
+
+;revit
+;TODO
+
+;tekla
+;42
+
+;coregeometry
+Source: "SpeckleCoreGeometry\*"; DestDir: "{localappdata}\SpeckleKits\SpeckleCoreGeometry"; Flags: ignoreversion recursesubdirs; Components: coregeometry  
 
 [Registry]
 Root: HKCU; Subkey: "SOFTWARE\McNeel\Rhinoceros\6.0\Plug-ins\512d9705-6f92-49ca-a606-d6d5c1ac6aa2"; ValueType: string; ValueName: "Name"; ValueData: "Speckle";
