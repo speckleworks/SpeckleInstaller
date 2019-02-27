@@ -79,6 +79,23 @@ after_build :
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
   - ls C:\projects\speckleinstaller\SpeckleDynamo
+  # DOWNLOAD specklecoregeometry ARTIFACTS
+  - ps: |
+      $prjUrl = "$apiUrl/projects/speckleworks/specklecoregeometry/branch/master"
+      $headers = @{
+        "Authorization" = "Bearer $token"
+        "Content-type" = "application/json"
+      }
+      $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
+      $jobId = $project.build.jobs[0].jobId
+      $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
+      $artifactFileName = $artifacts[0].fileName
+      $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
+      Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
+      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleCoreGeometry"
+      New-Item -ItemType directory -Path $dest
+      7z x -o"$dest" "$localArtifactPath" -r -aoa
+  - ls C:\projects\speckleinstaller\SpeckleCoreGeometry
   # EXECUTE INNO
   - InnoSetup\ISCC.exe SpeckleInstaller.iss
 
