@@ -39,14 +39,12 @@ after_build :
       $token = 'v2.bngo3nen438pm58fx2n1'
       $headers = @{
         "Authorization" = "Bearer $token"
-        "Content-type" = "application/json"
       }
   # DOWNLOAD RHINO+GH ARTIFACTS
   - ps: |
       $prjUrl = "$apiUrl/projects/speckleworks/specklerhino/branch/master"
       $headers = @{
         "Authorization" = "Bearer $token"
-        "Content-type" = "application/json"
       }
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
       $jobId = $project.build.jobs[0].jobId
@@ -67,7 +65,6 @@ after_build :
       $prjUrl = "$apiUrl/projects/speckleworks/speckledynamo/branch/master"
       $headers = @{
         "Authorization" = "Bearer $token"
-        "Content-type" = "application/json"
       }
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
       $jobId = $project.build.jobs[0].jobId
@@ -84,7 +81,6 @@ after_build :
       $prjUrl = "$apiUrl/projects/speckleworks/specklecoregeometry/branch/master"
       $headers = @{
         "Authorization" = "Bearer $token"
-        "Content-type" = "application/json"
       }
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
       $jobId = $project.build.jobs[0].jobId
