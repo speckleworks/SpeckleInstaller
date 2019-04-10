@@ -1,5 +1,5 @@
 # General Configuration
-version: 1.3.7.{build}
+version: 1.3.8.{build}
 skip_branch_with_pr: true
 
 # Environment Configuration
@@ -33,7 +33,7 @@ build:
 
 # after_build:
 #   - InnoSetup\ISCC.exe SpeckleInstaller.iss
-after_build : 
+after_build :
   - ps: |
       $apiUrl = 'https://ci.appveyor.com/api'
       $token = 'v2.bngo3nen438pm58fx2n1'
