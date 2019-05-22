@@ -39,8 +39,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Components]
 Name: updater; Description: Speckle Updater - v{#AppVersion}; Types: full custom; Flags: fixed
-Name: coregeometry; Description: Basic Geometry Object Model - v{#CoreGeometryVersion};  Types: full; Flags: fixed
-Name: elements; Description: A Higher Level Object Model - v{#SpeckleElementsVersion};  Types: full; Flags: fixed
+Name: coregeometry; Description: Basic Geometry Object Model - v{#CoreGeometryVersion};  Types: full custom; Flags: fixed
+Name: elements; Description: A Higher Level Object Model - v{#SpeckleElementsVersion};  Types: full custom; Flags: fixed
 Name: dynamo; Description: Speckle for Dynamo 2.0 - v{#DynamoVersion}; Types: full 
 Name: gh; Description: Speckle for Rhino 6 & Grasshopper - v{#RhinoVersion};  Types: full
 ;Name: excel; Description: Speckle for Revit;  Types: full
