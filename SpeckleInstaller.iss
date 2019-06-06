@@ -3,6 +3,7 @@
 #define AppVersion GetFileVersion("SpeckleUpdater\bin\Release\SpeckleUpdater.exe")
 #define RhinoVersion  GetFileVersion("SpeckleRhino\SpeckleRhinoConverter.dll")
 #define DynamoVersion  GetFileVersion("SpeckleDynamo\bin\SpeckleDynamo.dll")
+#define RevitVersion  GetFileVersion("SpeckleRevit\SpeckleRevit.dll")
 #define CoreGeometryVersion  GetFileVersion("SpeckleCoreGeometry\SpeckleCoreGeometry.dll")
 #define SpeckleElementsVersion  GetFileVersion("SpeckleElements\SpeckleElements.dll")
 #define AppPublisher "Speckle"
@@ -43,6 +44,8 @@ Name: coregeometry; Description: Basic Geometry Object Model - v{#CoreGeometryVe
 Name: elements; Description: A Higher Level Object Model - v{#SpeckleElementsVersion};  Types: full custom; Flags: fixed
 Name: dynamo; Description: Speckle for Dynamo 2.0 - v{#DynamoVersion}; Types: full 
 Name: gh; Description: Speckle for Rhino 6 & Grasshopper - v{#RhinoVersion};  Types: full
+Name: revit; Description: Speckle for Revit 2019 ALPHA -v{#RevitVersion};  Types: full
+
 ;Name: excel; Description: Speckle for Revit;  Types: full
 
 [Types]
@@ -65,6 +68,10 @@ Source: "SpeckleRhino\*"; DestDir: "{userappdata}\McNeel\Rhinoceros\6.0\Plug-ins
 ;dynamo
 Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
 Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+
+;revit
+Source: "SpeckleRevit\*"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2019\SpeckleRevit\"; Flags: ignoreversion recursesubdirs; Components: revit
+Source: "SpeckleRevit\SpeckleRevit.addin"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2019\"; Flags: ignoreversion; Components: revit
 
 ;excel                                                                                                                                    
 ;Source: "{#Repository}\Arup.Compute.Excel\bin\Release\Arup.Compute.Excel-AddIn-packed.xll"; DestDir: "{userappdata}\Microsoft\AddIns\"; Flags: ignoreversion; Components: excel  
