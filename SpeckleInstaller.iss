@@ -44,7 +44,7 @@ Name: coregeometry; Description: Basic Geometry Object Model - v{#CoreGeometryVe
 Name: elements; Description: A Higher Level Object Model - v{#SpeckleElementsVersion};  Types: full custom; Flags: fixed
 Name: dynamo; Description: Speckle for Dynamo 2.0 - v{#DynamoVersion}; Types: full 
 Name: gh; Description: Speckle for Rhino 6 & Grasshopper - v{#RhinoVersion};  Types: full
-Name: revit; Description: Speckle for Revit 2019 ALPHA -v{#RevitVersion};  Types: full
+Name: revit; Description: Speckle for Revit 2019 ALPHA - v{#RevitVersion};  Types: full
 
 ;Name: excel; Description: Speckle for Revit;  Types: full
 
