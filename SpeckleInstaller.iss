@@ -88,6 +88,10 @@ Source: "SpeckleCoreGeometry\*"; DestDir: "{localappdata}\SpeckleKits\SpeckleCor
 ;elements
 Source: "SpeckleElements\*"; DestDir: "{localappdata}\SpeckleKits\SpeckleElements"; Flags: ignoreversion recursesubdirs; Components: elements  
 
+[InstallDelete]
+Type: filesandordirs; Name: "{userappdata}\McNeel\Rhinoceros\6.0\Plug-ins\Speckle Rhino Plugin (512d9705-6f92-49ca-a606-d6d5c1ac6aa2)"
+Type: filesandordirs; Name: "{cf}\McNeel\Rhinoceros\6.0\Plug-ins\Speckle Rhino Plugin (512d9705-6f92-49ca-a606-d6d5c1ac6aa2)"
+
 [Registry]
 Root: HKCU; Subkey: "SOFTWARE\McNeel\Rhinoceros\6.0\Plug-ins\512d9705-6f92-49ca-a606-d6d5c1ac6aa2"; ValueType: string; ValueName: "Name"; ValueData: "Speckle";
 Root: HKCU; Subkey: "SOFTWARE\McNeel\Rhinoceros\6.0\Plug-ins\512d9705-6f92-49ca-a606-d6d5c1ac6aa2"; ValueType: string; ValueName: "FileName"; ValueData: "{userappdata}\McNeel\Rhinoceros\6.0\Plug-ins\Speckle Rhino Plugin (512d9705-6f92-49ca-a606-d6d5c1ac6aa2)\{#RhinoVersion}\SpeckleWinR6.rhp";  
