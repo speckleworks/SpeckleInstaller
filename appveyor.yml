@@ -1,5 +1,5 @@
 # General Configuration
-version: 1.6.6.{build}
+version: 1.7.0.{build}
 skip_branch_with_pr: true
 
 # Environment Configuration
@@ -122,6 +122,21 @@ after_build :
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
   - ls C:\projects\speckleinstaller\SpeckleElements
+  # DOWNLOAD specklecoregeometry ARTIFACTS
+  - ps: |
+      $prjUrl = "$apiUrl/projects/speckleworks/specklestructural/branch/master"
+      $headers = @{
+        "Authorization" = "Bearer $token"
+      }
+      $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
+      $jobId = $project.build.jobs[0].jobId
+      $artifactFileName = "SpeckleStructural.zip"
+      $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
+      Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
+      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleStructural"
+      New-Item -ItemType directory -Path $dest
+      7z x -o"$dest" "$localArtifactPath" -r -aoa
+  - ls C:\projects\speckleinstaller\SpeckleStructural
   # EXECUTE INNO
   - InnoSetup\ISCC.exe SpeckleInstaller.iss
 
