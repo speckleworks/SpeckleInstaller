@@ -1,5 +1,5 @@
 # General Configuration
-version: 1.7.1.{build}
+version: 1.7.2.{build}
 skip_branch_with_pr: true
 
 # Environment Configuration
@@ -150,7 +150,7 @@ deploy:
   description: 'The best Speckle so far...'
   provider: GitHub
   auth_token:
-    secure: mxiydinHKH3TmtBeDKldgt7VD90uiOW/GCbUD70x5HMB7B7lWinN3A2tw2dnt17x # your encrypted token from GitHub
+    secure: 9nfxgolvxI7ip76ZuounaCZs85Y9M9jxqGO0ahwQUEnTdN12xrbNVIENAHNtRYxc # your encrypted token from GitHub
   artifact: Speckle.exe
   draft: false
   prerelease: true
