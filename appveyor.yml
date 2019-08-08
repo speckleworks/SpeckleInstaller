@@ -49,7 +49,8 @@ after_build :
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
       $jobId = $project.build.jobs[0].jobId
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
-      $artifactFileName = $artifacts[0].fileName
+      $artifact = $artifacts | Where name -eq "Release"
+      $artifactFileName = $artifact.fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       $start_time = Get-Date
       Invoke-WebRequest -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
@@ -69,7 +70,8 @@ after_build :
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
       $jobId = $project.build.jobs[0].jobId
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
-      $artifactFileName = $artifacts[0].fileName
+      $artifact = $artifacts | Where name -eq "Release"
+      $artifactFileName = $artifact.fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleDynamo"
@@ -85,7 +87,8 @@ after_build :
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
       $jobId = $project.build.jobs[0].jobId
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
-      $artifactFileName = $artifacts[0].fileName
+      $artifact = $artifacts | Where name -eq "Release"
+      $artifactFileName = $artifact.fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit"
@@ -100,14 +103,16 @@ after_build :
       }
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
       $jobId = $project.build.jobs[0].jobId
-      $artifactFileName = "SpeckleCoreGeometry.zip"
+      $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
+      $artifact = $artifacts | Where name -eq "Release"
+      $artifactFileName = $artifact.fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleCoreGeometry"
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
   - ls C:\projects\speckleinstaller\SpeckleCoreGeometry
-  # DOWNLOAD specklecoregeometry ARTIFACTS
+  # DOWNLOAD speckleelements ARTIFACTS
   - ps: |
       $prjUrl = "$apiUrl/projects/speckleworks/speckleelements/branch/master"
       $headers = @{
@@ -115,14 +120,16 @@ after_build :
       }
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
       $jobId = $project.build.jobs[0].jobId
-      $artifactFileName = "SpeckleElements.zip"
+      $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
+      $artifact = $artifacts | Where name -eq "Release"
+      $artifactFileName = $artifact.fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleElements"
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
   - ls C:\projects\speckleinstaller\SpeckleElements
-  # DOWNLOAD specklecoregeometry ARTIFACTS
+  # DOWNLOAD specklestructural ARTIFACTS
   - ps: |
       $prjUrl = "$apiUrl/projects/speckleworks/specklestructural/branch/master"
       $headers = @{
@@ -130,7 +137,9 @@ after_build :
       }
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
       $jobId = $project.build.jobs[0].jobId
-      $artifactFileName = "SpeckleStructural.zip"
+      $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
+      $artifact = $artifacts | Where name -eq "Release"
+      $artifactFileName = $artifact.fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleStructural"
