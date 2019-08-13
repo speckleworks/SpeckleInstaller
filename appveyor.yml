@@ -1,5 +1,5 @@
 # General Configuration
-version: 1.7.7.{build}
+version: 1.7.8.{build}
 skip_branch_with_pr: true
 
 # Environment Configuration
