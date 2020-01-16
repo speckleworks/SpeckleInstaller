@@ -76,6 +76,10 @@ Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.0\packag
 Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.1\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo2_1
 Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.1\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo2_1
 
+;dynamo for civil 3d
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Autodesk\C3D 2020\Dynamo\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Autodesk\C3D 2020\Dynamo\2.1\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo2_1
+
 ;revit
 Source: "SpeckleRevit\*"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2019\SpeckleRevit\"; Flags: ignoreversion recursesubdirs; Components: revit
 Source: "SpeckleRevit\SpeckleRevit.addin"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2019\"; Flags: ignoreversion; Components: revit
