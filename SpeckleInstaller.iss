@@ -48,7 +48,9 @@ Name: dynamo; Description: Speckle for Dynamo 2.0 - v{#DynamoVersion}; Types: fu
 Name: dynamo2_1; Description: Speckle for Dynamo 2.1 - v{#DynamoVersion}; Types: full
 Name: dynamo2_4; Description: Speckle for Dynamo 2.4 - v{#DynamoVersion}; Types: full  
 Name: gh; Description: Speckle for Rhino 6 & Grasshopper - v{#RhinoVersion};  Types: full
-Name: revit; Description: Speckle for Revit 2019 ALPHA - v{#RevitVersion};  Types: full
+Name: revit19; Description: Speckle for Revit 2019 ALPHA - v{#RevitVersion};  Types: full
+Name: revit20; Description: Speckle for Revit 2020 ALPHA - v{#RevitVersion};  Types: full
+Name: revit21; Description: Speckle for Revit 2021 ALPHA - v{#RevitVersion};  Types: full
 
 ;Name: excel; Description: Speckle for Revit;  Types: full
 
@@ -83,8 +85,12 @@ Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Autodesk\C3D 2020\Dynamo\2.1\
 Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Autodesk\C3D 2020\Dynamo\2.4\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo2_4
 
 ;revit
-Source: "SpeckleRevit\*"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2019\SpeckleRevit\"; Flags: ignoreversion recursesubdirs; Components: revit
-Source: "SpeckleRevit\SpeckleRevit.addin"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2019\"; Flags: ignoreversion; Components: revit
+Source: "SpeckleRevit2019\*"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2019\SpeckleRevit\"; Flags: ignoreversion recursesubdirs; Components: revit19
+Source: "SpeckleRevit2019\SpeckleRevit.addin"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2019\"; Flags: ignoreversion; Components: revit19
+Source: "SpeckleRevit2020\*"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2020\SpeckleRevit\"; Flags: ignoreversion recursesubdirs; Components: revit20
+Source: "SpeckleRevit2020\SpeckleRevit.addin"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2020\"; Flags: ignoreversion; Components: revit20
+Source: "SpeckleRevit2021\*"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2021\SpeckleRevit\"; Flags: ignoreversion recursesubdirs; Components: revit21
+Source: "SpeckleRevit2021\SpeckleRevit.addin"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2021\"; Flags: ignoreversion; Components: revit21
 
 ;excel                                                                                                                                    
 ;Source: "{#Repository}\Arup.Compute.Excel\bin\Release\Arup.Compute.Excel-AddIn-packed.xll"; DestDir: "{userappdata}\Microsoft\AddIns\"; Flags: ignoreversion; Components: excel  
