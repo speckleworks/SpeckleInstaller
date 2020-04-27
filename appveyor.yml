@@ -93,7 +93,7 @@ after_build :
       $artifactFileName = $artifact.fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
-      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit"$version
+      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit" + $version
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
   - ls C:\projects\speckleinstaller
@@ -113,7 +113,7 @@ after_build :
       $artifactFileName = $artifact.fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
-      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit"$version
+      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit" + $version
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
   - ls C:\projects\speckleinstaller
@@ -133,7 +133,7 @@ after_build :
       $artifactFileName = $artifact.fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
-      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit"$version
+      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit" + $version
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
   - ls C:\projects\speckleinstaller
