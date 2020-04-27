@@ -81,12 +81,13 @@ after_build :
    # DOWNLOAD REVIT 2019 ARTIFACTS
   - ps: |
       $version = "2019"
+      $release = "Release" + $version
       $prjUrl = "$apiUrl/projects/speckleworks/specklerevitreboot/branch/master"
       $headers = @{
         "Authorization" = "Bearer $token"
       }
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
-      $job = $project.build.jobs | Where name -eq "Release"$version
+      $job = $project.build.jobs | Where name -eq $release
       $jobId = $job.jobId
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
       $artifact = $artifacts | Where name -eq "Release"
@@ -101,12 +102,13 @@ after_build :
      # DOWNLOAD REVIT 2020 ARTIFACTS
   - ps: |
       $version = "2020"
+      $release = "Release" + $version
       $prjUrl = "$apiUrl/projects/speckleworks/specklerevitreboot/branch/master"
       $headers = @{
         "Authorization" = "Bearer $token"
       }
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
-      $job = $project.build.jobs | Where name -eq "Release"$version
+      $job = $project.build.jobs | Where name -eq $release
       $jobId = $job.jobId
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
       $artifact = $artifacts | Where name -eq "Release"
@@ -121,12 +123,13 @@ after_build :
      # DOWNLOAD REVIT 2021 ARTIFACTS
   - ps: |
       $version = "2021"
+      $release = "Release" + $version
       $prjUrl = "$apiUrl/projects/speckleworks/specklerevitreboot/branch/master"
       $headers = @{
         "Authorization" = "Bearer $token"
       }
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
-      $job = $project.build.jobs | Where name -eq "Release"$version
+      $job = $project.build.jobs | Where name -eq $release
       $jobId = $job.jobId
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
       $artifact = $artifacts | Where name -eq "Release"
