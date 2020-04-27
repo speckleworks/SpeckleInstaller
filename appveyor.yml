@@ -82,6 +82,7 @@ after_build :
   - ps: |
       $version = "2019"
       $release = "Configuration: Release" + $version
+      write-host $release
       $prjUrl = "$apiUrl/projects/speckleworks/specklerevitreboot/branch/master"
       $headers = @{
         "Authorization" = "Bearer $token"
