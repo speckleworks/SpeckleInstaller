@@ -81,7 +81,7 @@ after_build :
    # DOWNLOAD REVIT 2019 ARTIFACTS
   - ps: |
       $version = "2019"
-      $release = "Release" + $version
+      $release = "Configuration: Release" + $version
       $prjUrl = "$apiUrl/projects/speckleworks/specklerevitreboot/branch/master"
       $headers = @{
         "Authorization" = "Bearer $token"
@@ -102,7 +102,7 @@ after_build :
      # DOWNLOAD REVIT 2020 ARTIFACTS
   - ps: |
       $version = "2020"
-      $release = "Release" + $version
+      $release = "Configuration: Release" + $version
       $prjUrl = "$apiUrl/projects/speckleworks/specklerevitreboot/branch/master"
       $headers = @{
         "Authorization" = "Bearer $token"
@@ -123,7 +123,7 @@ after_build :
      # DOWNLOAD REVIT 2021 ARTIFACTS
   - ps: |
       $version = "2021"
-      $release = "Release" + $version
+      $release = "Configuration: Releases" + $version
       $prjUrl = "$apiUrl/projects/speckleworks/specklerevitreboot/branch/master"
       $headers = @{
         "Authorization" = "Bearer $token"
