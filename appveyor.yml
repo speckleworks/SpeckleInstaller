@@ -86,14 +86,14 @@ after_build :
         "Authorization" = "Bearer $token"
       }
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
-      $job = $project.build.jobs | Where name -eq "Release"version
+      $job = $project.build.jobs | Where name -eq "Release"$version
       $jobId = $job.jobId
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
       $artifact = $artifacts | Where name -eq "Release"
       $artifactFileName = $artifact.fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
-      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit"version
+      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit"$version
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
   - ls C:\projects\speckleinstaller
@@ -106,14 +106,14 @@ after_build :
         "Authorization" = "Bearer $token"
       }
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
-      $job = $project.build.jobs | Where name -eq "Release"version
+      $job = $project.build.jobs | Where name -eq "Release"$version
       $jobId = $job.jobId
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
       $artifact = $artifacts | Where name -eq "Release"
       $artifactFileName = $artifact.fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
-      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit"+version
+      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit"$version
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
   - ls C:\projects\speckleinstaller
@@ -126,14 +126,14 @@ after_build :
         "Authorization" = "Bearer $token"
       }
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
-      $job = $project.build.jobs | Where name -eq "Release"version
+      $job = $project.build.jobs | Where name -eq "Release"$version
       $jobId = $job.jobId
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
       $artifact = $artifacts | Where name -eq "Release"
       $artifactFileName = $artifact.fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
-      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit"version
+      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit"$version
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
   - ls C:\projects\speckleinstaller
