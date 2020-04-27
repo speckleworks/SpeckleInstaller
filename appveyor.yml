@@ -98,7 +98,7 @@ after_build :
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit" + $version
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
-  - ls C:\projects\speckleinstaller
+  - ls C:\projects\speckleinstaller$version
 
      # DOWNLOAD REVIT 2020 ARTIFACTS
   - ps: |
@@ -119,12 +119,12 @@ after_build :
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit" + $version
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
-  - ls C:\projects\speckleinstaller
+  - ls C:\projects\speckleinstaller$version
 
      # DOWNLOAD REVIT 2021 ARTIFACTS
   - ps: |
       $version = "2021"
-      $release = "Configuration: Releases" + $version
+      $release = "Configuration: Release" + $version
       $prjUrl = "$apiUrl/projects/speckleworks/specklerevitreboot/branch/master"
       $headers = @{
         "Authorization" = "Bearer $token"
@@ -140,7 +140,7 @@ after_build :
       $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit" + $version
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
-  - ls C:\projects\speckleinstaller
+  - ls C:\projects\speckleinstaller$version
 
   # DOWNLOAD specklecoregeometry ARTIFACTS
   - ps: |
