@@ -1,5 +1,5 @@
 # General Configuration
-version: 1.8.15.{build}
+version: 1.8.16.{build}
 skip_branch_with_pr: true
 
 # Environment Configuration
@@ -78,23 +78,67 @@ after_build :
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
   - ls C:\projects\speckleinstaller\SpeckleDynamo
-   # DOWNLOAD REVIT ARTIFACTS
+   # DOWNLOAD REVIT 2019 ARTIFACTS
   - ps: |
+      $version = "2019"
+      $release = "Configuration: Release" + $version
+      write-host $release
       $prjUrl = "$apiUrl/projects/speckleworks/specklerevitreboot/branch/master"
       $headers = @{
         "Authorization" = "Bearer $token"
       }
       $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
-      $jobId = $project.build.jobs[0].jobId
+      $job = $project.build.jobs | Where name -eq $release
+      $jobId = $job.jobId
       $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
       $artifact = $artifacts | Where name -eq "Release"
       $artifactFileName = $artifact.fileName
       $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
       Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
-      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit"
+      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit" + $version
       New-Item -ItemType directory -Path $dest
       7z x -o"$dest" "$localArtifactPath" -r -aoa
-  - ls C:\projects\speckleinstaller\SpeckleRevit
+
+     # DOWNLOAD REVIT 2020 ARTIFACTS
+  - ps: |
+      $version = "2020"
+      $release = "Configuration: Release" + $version
+      $prjUrl = "$apiUrl/projects/speckleworks/specklerevitreboot/branch/master"
+      $headers = @{
+        "Authorization" = "Bearer $token"
+      }
+      $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
+      $job = $project.build.jobs | Where name -eq $release
+      $jobId = $job.jobId
+      $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
+      $artifact = $artifacts | Where name -eq "Release"
+      $artifactFileName = $artifact.fileName
+      $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
+      Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
+      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit" + $version
+      New-Item -ItemType directory -Path $dest
+      7z x -o"$dest" "$localArtifactPath" -r -aoa
+
+     # DOWNLOAD REVIT 2021 ARTIFACTS
+  - ps: |
+      $version = "2021"
+      $release = "Configuration: Release" + $version
+      $prjUrl = "$apiUrl/projects/speckleworks/specklerevitreboot/branch/master"
+      $headers = @{
+        "Authorization" = "Bearer $token"
+      }
+      $project = Invoke-RestMethod -Method Get -Uri "$prjUrl" -Headers $headers
+      $job = $project.build.jobs | Where name -eq $release
+      $jobId = $job.jobId
+      $artifacts = Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts" -Headers $headers
+      $artifact = $artifacts | Where name -eq "Release"
+      $artifactFileName = $artifact.fileName
+      $localArtifactPath = "$Env:APPVEYOR_BUILD_FOLDER\$artifactFileName"
+      Invoke-RestMethod -Method Get -Uri "$apiUrl/buildjobs/$jobId/artifacts/$artifactFileName" -OutFile $localArtifactPath -Headers $headers
+      $dest = "$Env:APPVEYOR_BUILD_FOLDER\SpeckleRevit" + $version
+      New-Item -ItemType directory -Path $dest
+      7z x -o"$dest" "$localArtifactPath" -r -aoa
+
   # DOWNLOAD specklecoregeometry ARTIFACTS
   - ps: |
       $prjUrl = "$apiUrl/projects/speckleworks/specklecoregeometry/branch/master"
