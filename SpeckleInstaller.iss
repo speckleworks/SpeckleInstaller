@@ -3,7 +3,7 @@
 #define AppVersion GetFileVersion("SpeckleUpdater\bin\Release\SpeckleUpdater.exe")
 #define RhinoVersion  GetFileVersion("SpeckleRhino\SpeckleRhinoConverter.dll")
 #define DynamoVersion  GetFileVersion("SpeckleDynamo\bin\SpeckleDynamo.dll")
-#define RevitVersion  GetFileVersion("SpeckleRevit2021\SpeckleRevit.dll")
+#define RevitVersion  GetFileVersion("SpeckleRevit2021\SpeckleRevit\SpeckleRevit.dll")
 #define CoreGeometryVersion  GetFileVersion("SpeckleCoreGeometry\SpeckleCoreGeometry.dll")
 #define SpeckleElementsVersion  GetFileVersion("SpeckleElements\SpeckleElements.dll")
 #define SpeckleStructuralVersion  GetFileVersion("SpeckleStructural\SpeckleStructural.dll")
