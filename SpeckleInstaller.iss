@@ -44,9 +44,7 @@ Name: updater; Description: Speckle Updater - v{#AppVersion}; Types: full custom
 Name: coregeometry; Description: Basic Geometry Object Model - v{#CoreGeometryVersion};  Types: full custom; Flags: fixed
 Name: elements; Description: A Higher Level Object Model - v{#SpeckleElementsVersion};  Types: full custom; Flags: fixed  
 Name: structural; Description: Structural Object Model - v{#SpeckleStructuralVersion};  Types: full custom; Flags: fixed
-Name: dynamo; Description: Speckle for Dynamo 2.0 - v{#DynamoVersion}; Types: full
-Name: dynamo2_1; Description: Speckle for Dynamo 2.1 - v{#DynamoVersion}; Types: full
-Name: dynamo2_4; Description: Speckle for Dynamo 2.4 - v{#DynamoVersion}; Types: full  
+Name: dynamo; Description: Speckle for Dynamo - v{#DynamoVersion}; Types: full
 Name: gh; Description: Speckle for Rhino 6 & Grasshopper - v{#RhinoVersion};  Types: full
 Name: revit19; Description: Speckle for Revit 2019 ALPHA - v{#RevitVersion};  Types: full
 Name: revit20; Description: Speckle for Revit 2020 ALPHA - v{#RevitVersion};  Types: full
@@ -72,17 +70,25 @@ Source: "SpeckleUpdater\bin\Release\*"; DestDir: "{#SpeckleFolder}"; Flags: igno
 Source: "SpeckleRhino\*"; DestDir: "{userappdata}\McNeel\Rhinoceros\6.0\Plug-ins\Speckle Rhino Plugin (512d9705-6f92-49ca-a606-d6d5c1ac6aa2)\{#RhinoVersion}"; Flags: ignoreversion recursesubdirs; Components: gh  
 
 ;dynamo
-;Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
-;Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
-
-;dynamo2.1
-Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.1\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo2_1
-Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.1\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo2_1
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.1\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.1\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.2\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.2\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.3\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.3\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.4\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.4\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.5\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.5\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Revit\2.6\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Dynamo\Dynamo Core\2.6\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
 
 ;dynamo for civil 3d
 ;Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Autodesk\C3D 2020\Dynamo\2.0\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
-Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Autodesk\C3D 2020\Dynamo\2.1\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo2_1
-Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Autodesk\C3D 2020\Dynamo\2.4\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo2_4
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Autodesk\C3D 2020\Dynamo\2.1\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Autodesk\C3D 2020\Dynamo\2.4\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Autodesk\C3D 2021\Dynamo\2.5\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
+Source: "SpeckleDynamo\*"; DestDir: "{userappdata}\Autodesk\C3D 2021\Dynamo\2.6\packages\Speckle for Dynamo\"; Flags: ignoreversion recursesubdirs; Components: dynamo
 
 ;revit
 Source: "SpeckleRevit2019\*"; DestDir: "{userappdata}\Autodesk\Revit\Addins\2019\"; Flags: ignoreversion recursesubdirs; Components: revit19
