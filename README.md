@@ -1,8 +1,8 @@
 # Speckle Installer
 
-[![Build status](https://ci.appveyor.com/api/projects/status/pkdn8l2bumxy3esa/branch/master?svg=true)](https://ci.appveyor.com/project/SpeckleWorks/speckleinstaller)
+[![Build status](https://ci.appveyor.com/api/projects/status/pkdn8l2bumxy3esa/branch/master?svg=true)](https://ci.appveyor.com/project/SpeckleWorks/speckleinstaller) ![GitHub All Releases](https://img.shields.io/github/downloads/speckleworks/speckleinstaller/total)
 
-![image](https://user-images.githubusercontent.com/2679513/48942587-fba54a00-ef17-11e8-8708-65f6be50ebe0.png)
+![image](https://user-images.githubusercontent.com/2679513/48942587-fba54a00-ef17-11e8-8708-65f6be50ebe0.png) 
 
 Speckle desktop client installer for:
 
