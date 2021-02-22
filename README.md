@@ -2,6 +2,13 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/pkdn8l2bumxy3esa/branch/master?svg=true)](https://ci.appveyor.com/project/SpeckleWorks/speckleinstaller) ![GitHub All Releases](https://img.shields.io/github/downloads/speckleworks/speckleinstaller/total)
 
+## ⚠️ IMPORTANT ⚠️
+
+Speckle v1 has reached EOL and is no longer mainatined. Check out our brand new 👉 [Speckle v2](https://github.com/specklesystems)!
+Read more about the announcemnt [here](https://speckle.systems/blog/speckle2-vision-and-faq) and check out or new [website](https://speckle.systems).
+
+
+
 ![image](https://user-images.githubusercontent.com/2679513/48942587-fba54a00-ef17-11e8-8708-65f6be50ebe0.png) 
 
 Speckle desktop client installer for:
